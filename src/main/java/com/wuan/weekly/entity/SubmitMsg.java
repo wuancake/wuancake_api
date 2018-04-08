@@ -5,7 +5,7 @@ package com.wuan.weekly.entity;
  * @author Maggic
  *
  */
-public class SubmitMsg extends Msg{
+public class SubmitMsg extends Msg {
 
 	public SubmitMsg() {
 		super();

@@ -1,11 +1,10 @@
 package com.wuan.weekly.mapper;
 
+import com.wuan.weekly.entity.Report;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-
-import com.wuan.weekly.entity.Report;
 
 @Mapper
 public interface WeeklyDao {
@@ -15,6 +14,6 @@ public interface WeeklyDao {
 	public void reportWeekly(Report report);
 
 	@Select("select * from report where user_id = #{userId} and week_num = #{weekNum}")
-	public Report getReportByWeekNum(@Param("weekNum")int weekNum,@Param("userId")int userId);
+	public Report getReportByWeekNum(@Param("weekNum") int weekNum, @Param("userId") int userId);
 
 }
