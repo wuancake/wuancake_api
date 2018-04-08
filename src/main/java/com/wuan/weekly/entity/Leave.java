@@ -69,4 +69,5 @@ public class Leave extends Info{
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

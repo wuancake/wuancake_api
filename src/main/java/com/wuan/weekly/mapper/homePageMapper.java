@@ -1,11 +1,13 @@
 package com.wuan.weekly.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.wuan.weekly.entity.Leave;
 
+@Mapper
 public interface homePageMapper {
 
 	@Insert(
@@ -22,6 +24,5 @@ public interface homePageMapper {
 
 	@Select("select status from weekly where userId = #{userId}")
 	public int getStatus(@Param("userId") int id);
-
 	
 }

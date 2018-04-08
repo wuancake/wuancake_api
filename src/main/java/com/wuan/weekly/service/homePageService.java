@@ -3,12 +3,14 @@ package com.wuan.weekly.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wuan.weekly.entity.Leave;
 import com.wuan.weekly.entity.Main;
 import com.wuan.weekly.mapper.homePageMapper;
 
+@Service
 public class homePageService {
 
 	@Autowired

@@ -18,4 +18,5 @@ public class Info {
 	public void setInfoCode(int infoCode) {
 		this.infoCode = infoCode;
 	}
+	
 }
