@@ -82,6 +82,9 @@ public class ReportController {
 		return msg;
 	}
 
+	/**
+	 * 查看周报
+	 */
 	@RequestMapping(value="/myweekly",method=RequestMethod.POST,params= {"userId","weekNum"})
 	public Msg getReport(@RequestParam("userId") int userId,@RequestParam("weekNum") int weekNum) {
 		Msg msg = null;
@@ -127,6 +130,7 @@ public class ReportController {
 		msg.setTrouble(text[1]);
 		msg.setPlane(text[2]);
 		msg.setUrl(text[3]);
+		msg.setDate(report.getReplyTime());
 		msg.setInfoText(infoText);
 		msg.setInfoCode(infoCode);
 		return msg;
