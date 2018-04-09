@@ -58,12 +58,9 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void selectGroup(User user, Integer group_id) {
-        attendMapper.forUserAndGroup(user.getId(), group_id, "已选择分组");
-        UserGroup userGroup = userGroupMapper.findUserGroupByUserId(user.getId());
-        userGroup.setGroup_id(group_id);
-        userGroup.setCreate_time(new Date());
-        userGroup.setModify_time(new Date());
-        userGroupMapper.selectGroup(user.getId(), userGroup.getGroup_id(), userGroup.getDeleteFlg(), userGroup.getCreate_time(), userGroup.getModify_time());
+        userGroupMapper.updateGroup(user.getId(), group_id);
+
+        attendMapper.updateAttend(group_id, "已选择分组", user.getId());
     }
 
     @Override
@@ -72,7 +69,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserGroup findUserGroupByUserId(Integer id) {
+    public Integer findUserGroupByUserId(Integer id) {
         return userGroupMapper.findUserGroupByUserId(id);
     }
 

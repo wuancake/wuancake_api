@@ -32,11 +32,11 @@ public class UserController {
         user.setDeleteFlg(0);
         user.setCreate_time(new Date());
         user.setModify_time(new Date());
-		
-		if(user.getWuan_name()==null){
-			user.setWuan_name(user.getUser_name());
-		}
-		
+
+        if (user.getWuan_name() == null) {
+            user.setWuan_name(user.getUser_name());
+        }
+
         String infoText = "注册成功";
         String infoCode = "301";
         String url = "/login";
@@ -69,6 +69,7 @@ public class UserController {
         if (user != null) {
             try {
                 userService.selectGroup(user, group_id);
+
                 jsonBean.setUser_id(userService.findUserByUserId(user_id).getId());
                 jsonBean.setGroup_id(group_id);
             } catch (Exception e) {
@@ -93,15 +94,15 @@ public class UserController {
         String infoCode = "301";
         String url = "/main";
         JsonBean jsonBean = new JsonBean();
-
+        Integer user_id = user.getId();
         if (user != null) {
-            UserGroup userGroup = userService.findUserGroupByUserId(user.getId());
+            Integer group_id = userService.findUserGroupByUserId(user_id);
             jsonBean.setInfoText(infoText);
             jsonBean.setInfoCode(infoCode);
             jsonBean.setUser_id(user.getId());
-            jsonBean.setGroup_id(userGroup.getGroup_id());
+            jsonBean.setGroup_id(group_id);
 
-            if (userGroup.getGroup_id() != 0) {
+            if (group_id != 0) {
                 jsonBean.setUrl(url);
                 return jsonBean;
             } else {

@@ -17,5 +17,5 @@ public interface IUserService {
 
     User findUserByEmailAndPassword(String email, String password);
 
-    UserGroup findUserGroupByUserId(Integer id);
+    Integer findUserGroupByUserId(Integer id);
 }
