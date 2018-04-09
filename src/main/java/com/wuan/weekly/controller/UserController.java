@@ -33,8 +33,8 @@ public class UserController {
         user.setCreate_time(new Date());
         user.setModify_time(new Date());
 		
-		if(user.getWuan_name==null){
-			user.setWuan_name(user.getUser_name);
+		if(user.getWuan_name()==null){
+			user.setWuan_name(user.getUser_name());
 		}
 		
         String infoText = "注册成功";
