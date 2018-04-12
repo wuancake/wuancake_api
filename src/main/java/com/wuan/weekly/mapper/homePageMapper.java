@@ -22,7 +22,7 @@ public interface homePageMapper {
 			@Param("userId")int user_id, 
 			@Param("status") int status);
 
-	@Select("select status from report where userId = #{userId}")
+	@Select("select status from report where user_id = #{userId}")
 	public int getStatus(@Param("userId") int id);
 	
 }
