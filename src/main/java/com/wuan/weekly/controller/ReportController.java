@@ -51,7 +51,7 @@ public class ReportController {
 							@RequestParam("plane") String plane,
 							@RequestParam("url") String url) {
 		//设置周报状态为已提交
-		int status = 1;
+		int status = 2;
 		//生成提交周报时间
 		Date dt = new Date();
 		//根据字段生成周报内容
