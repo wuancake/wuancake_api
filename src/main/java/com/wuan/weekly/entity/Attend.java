@@ -8,7 +8,7 @@ package com.wuan.weekly.entity;
 public class Attend {
     private Integer user_id;
     private Integer group_id = 0;
-    private String status;
+    private Integer status;
 
     public Integer getUser_id() {
         return user_id;
@@ -26,11 +26,11 @@ public class Attend {
         this.group_id = group_id;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

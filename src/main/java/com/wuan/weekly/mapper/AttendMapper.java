@@ -13,8 +13,8 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface AttendMapper {
     @Insert("INSERT INTO attend VALUES(#{user_id},#{group_id},#{status})")
-    void forUserAndGroup(@Param("user_id") Integer user_id, @Param("group_id") Integer group_id, @Param("status") String status);
+    void forUserAndGroup(@Param("user_id") Integer user_id, @Param("group_id") Integer group_id, @Param("status") Integer status);
 
     @Update("update attend set group_id = #{group_id},status = #{status} where user_id = #{user_id}")
-    void updateAttend( @Param("group_id") Integer group_id,@Param("status") String status,@Param("user_id") Integer user_id);
+    void updateAttend( @Param("group_id") Integer group_id,@Param("status") Integer status,@Param("user_id") Integer user_id);
 }
