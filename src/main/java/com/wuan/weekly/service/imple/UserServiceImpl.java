@@ -47,7 +47,7 @@ public class UserServiceImpl implements IUserService {
         userGroup.setDeleteFlg(0);//默认
         userGroupMapper.selectGroup(userGroup.getUser_id(), userGroup.getGroup_id(), userGroup.getDeleteFlg(), userGroup.getCreate_time(), userGroup.getModify_time());
         //对应的attend表
-        attendMapper.forUserAndGroup(userGroup.getUser_id(), userGroup.getGroup_id(), "未选择分组");
+        attendMapper.forUserAndGroup(userGroup.getUser_id(), userGroup.getGroup_id(), "1");
     }
 
 
@@ -60,7 +60,7 @@ public class UserServiceImpl implements IUserService {
     public void selectGroup(User user, Integer group_id) {
         userGroupMapper.updateGroup(user.getId(), group_id);
 
-        attendMapper.updateAttend(group_id, "已选择分组", user.getId());
+        attendMapper.updateAttend(group_id, "1", user.getId());
     }
 
     @Override
