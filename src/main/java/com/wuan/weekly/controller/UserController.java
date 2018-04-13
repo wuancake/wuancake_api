@@ -94,8 +94,8 @@ public class UserController {
         String infoCode = "301";
         String url = "/main";
         JsonBean jsonBean = new JsonBean();
-        Integer user_id = user.getId();
         if (user != null) {
+            Integer user_id = user.getId();
             Integer group_id = userService.findUserGroupByUserId(user_id);
             jsonBean.setInfoText(infoText);
             jsonBean.setInfoCode(infoCode);
