@@ -23,7 +23,7 @@ public interface UserMapper {
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", before = true, statementType = StatementType.STATEMENT, resultType = Integer.class)
     void saveUser(@Param("user_name") String user_name, @Param("email") String email, @Param("wuan_name") String wuan_name, @Param("password") String password, @Param("QQ") Integer QQ, @Param("auth") Integer auth, @Param("deleteFlg") Integer deleteFlg, @Param("create_time") Date create_time, @Param("modify_time") Date modify_time);
 
-    @Select("SELECT * FROM user WHERE user_name = #{user_name} AND email = #{email}")
+    @Select("SELECT * FROM user WHERE user_name = #{user_name} OR email = #{email}")
     User findUserByUsernameAndEmail(@Param("user_name") String user_name, @Param("email") String email);
 
 }

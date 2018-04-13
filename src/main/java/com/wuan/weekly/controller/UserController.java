@@ -46,7 +46,6 @@ public class UserController {
             jsonBean.setUser_id(userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword()).getId());
             jsonBean.setGroup_id(0);
         } catch (Exception e) {
-            e.printStackTrace();
             infoText = "用户名或邮箱已占用";
             infoCode = "500";
             url = null;
@@ -73,7 +72,6 @@ public class UserController {
                 jsonBean.setUser_id(userService.findUserByUserId(user_id).getId());
                 jsonBean.setGroup_id(group_id);
             } catch (Exception e) {
-                e.printStackTrace();
                 infoText = "分组选择失败";
                 infoCode = "500";
                 url = null;
