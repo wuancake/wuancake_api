@@ -13,6 +13,8 @@ import com.wuan.weekly.entity.Msg;
 import com.wuan.weekly.entity.Report;
 import com.wuan.weekly.entity.ReportMsg;
 import com.wuan.weekly.entity.SubmitMsg;
+import com.wuan.weekly.exception.CheckReportFailException;
+import com.wuan.weekly.exception.ReportFailException;
 import com.wuan.weekly.service.imple.WeeklyServiceImple;
 
 @RestController
@@ -41,15 +43,15 @@ public class ReportController {
 
 	/**
 	 * 提交周报
-	 * @return 
 	 */
 	@RequestMapping(value="/submit",method=RequestMethod.POST,params= {"userId","groupId","complete","trouble","plane","url"})
 	public Msg reportWeekly(@RequestParam("userId") int userId,
-							@RequestParam("groupId") int groupId,
-							@RequestParam("complete") String complete,
-							@RequestParam("trouble") String trouble,
-							@RequestParam("plane") String plane,
-							@RequestParam("url") String url) {
+			@RequestParam("groupId") int groupId,
+			@RequestParam("complete") String complete,
+			@RequestParam("trouble") String trouble,
+			@RequestParam("plane") String plane,
+			@RequestParam("url") String url) {
+		
 		//设置周报状态为已提交
 		int status = 2;
 		//生成提交周报时间
@@ -70,12 +72,9 @@ public class ReportController {
 			//像数据库提交周报
 			weeklyServiceImple.reportWeekly(report);
 		} catch(Exception e) {
-			Msg msg = new SubmitMsg();
-			msg.setInfoCode(500);
-			msg.setInfoText("提交周报失败");
-			return msg;
+			throw new ReportFailException(e);
 		}
-		//像前端相应消息
+		//像前端响应消息
 		Msg msg = new SubmitMsg();
 		msg.setInfoCode(200);
 		msg.setInfoText("成功提交周报");
@@ -92,10 +91,7 @@ public class ReportController {
 		try {
 			report = weeklyServiceImple.getReportByWeekNum(weekNum, userId);
 		} catch(Exception e) {
-			msg = new Msg();
-			msg.setInfoText("查看周报失败");
-			msg.setInfoCode(500);
-			return msg;
+			throw new CheckReportFailException(e);
 		}
 		//找不到周报
 		if(report == null) {

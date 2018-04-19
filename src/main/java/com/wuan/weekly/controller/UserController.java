@@ -3,7 +3,6 @@ package com.wuan.weekly.controller;
 
 import com.wuan.weekly.entity.JsonBean;
 import com.wuan.weekly.entity.User;
-import com.wuan.weekly.entity.UserGroup;
 import com.wuan.weekly.service.imple.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
