@@ -9,8 +9,8 @@ public class User {
     private String wuan_name;
     private String password;
     private Integer QQ;
-    private Integer auth;
-    private Integer deleteFlg;
+    private Integer auth = 0;
+    private Integer deleteFlg = 0;
     private Date create_time;
     private Date modify_time;
 

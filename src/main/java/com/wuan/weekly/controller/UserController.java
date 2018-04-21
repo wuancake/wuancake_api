@@ -30,8 +30,6 @@ public class UserController {
     public @ResponseBody
     JsonBean save(User user) {
         //设置四个后台变量
-        user.setAuth(1);
-        user.setDeleteFlg(0);
         user.setCreate_time(new Date());
         user.setModify_time(new Date());
         //wuan_name被砍掉
