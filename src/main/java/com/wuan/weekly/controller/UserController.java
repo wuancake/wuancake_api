@@ -3,6 +3,7 @@ package com.wuan.weekly.controller;
 
 import com.wuan.weekly.entity.JsonBean;
 import com.wuan.weekly.entity.User;
+import com.wuan.weekly.entity.WaGroup;
 import com.wuan.weekly.service.imple.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Nobody
@@ -26,12 +29,12 @@ public class UserController {
     @RequestMapping(value = "regist")
     public @ResponseBody
     JsonBean save(User user) {
-
+        //设置四个后台变量
         user.setAuth(1);
         user.setDeleteFlg(0);
         user.setCreate_time(new Date());
         user.setModify_time(new Date());
-
+        //wuan_name被砍掉
         if (user.getWuan_name() == null) {
             user.setWuan_name(user.getUser_name());
         }
@@ -40,6 +43,7 @@ public class UserController {
         String infoCode = "301";
         String url = "/login";
         JsonBean jsonBean = new JsonBean();
+
         try {
             userService.saveUser(user);
             jsonBean.setUser_id(userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword()).getId());
@@ -116,5 +120,11 @@ public class UserController {
             jsonBean.setInfoCode(infoCode);
             return jsonBean;
         }
+    }
+
+    @RequestMapping(value = "findAllGroupInfo")
+    public @ResponseBody
+    List<WaGroup> findAllGroupInfo() {
+        return userService.findAllGroupInfo();
     }
 }

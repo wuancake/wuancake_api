@@ -2,6 +2,9 @@ package com.wuan.weekly.service;
 
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.UserGroup;
+import com.wuan.weekly.entity.WaGroup;
+
+import java.util.List;
 
 /**
  * @author Nobody
@@ -18,4 +21,6 @@ public interface IUserService {
     User findUserByEmailAndPassword(String email, String password);
 
     Integer findUserGroupByUserId(Integer id);
+
+    List<WaGroup> findAllGroupInfo();
 }

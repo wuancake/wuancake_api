@@ -2,15 +2,18 @@ package com.wuan.weekly.service.imple;
 
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.UserGroup;
+import com.wuan.weekly.entity.WaGroup;
 import com.wuan.weekly.mapper.AttendMapper;
 import com.wuan.weekly.mapper.UserGroupMapper;
 import com.wuan.weekly.mapper.UserMapper;
+import com.wuan.weekly.mapper.WaGroupMapper;
 import com.wuan.weekly.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Nobody
@@ -29,6 +32,13 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private AttendMapper attendMapper;
+
+    @Autowired
+    private WaGroupMapper waGroupMapper;
+
+    public List<WaGroup> findAllGroupInfo() {
+        return waGroupMapper.findAllGroupInfo();
+    }
 
     @Override
     public void saveUser(User user) throws Exception {
