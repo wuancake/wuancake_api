@@ -5,12 +5,18 @@ import com.wuan.weekly.entity.JsonBean;
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.WaGroup;
 import com.wuan.weekly.service.imple.UserServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -122,7 +128,18 @@ public class UserController {
 
     @RequestMapping(value = "findAllGroupInfo")
     public @ResponseBody
-    List<WaGroup> findAllGroupInfo() {
-        return userService.findAllGroupInfo();
+    JsonBean findAllGroupInfo(Model model) {
+        JsonBean jsonBean = new JsonBean();
+        jsonBean.setUrl("/home");
+        jsonBean.setInfoCode("301");
+        try {
+            List<WaGroup> allGroupInfo = userService.findAllGroupInfo();
+            jsonBean.setGroups(allGroupInfo);
+        } catch (Exception e) {
+            jsonBean.setUrl("/login");
+            jsonBean.setInfoCode("500");
+        }
+
+        return jsonBean;
     }
 }

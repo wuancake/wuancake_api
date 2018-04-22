@@ -1,5 +1,7 @@
 package com.wuan.weekly.entity;
 
+import java.util.List;
+
 /**
  * @author Nobody
  * Date: 2018/3/24
@@ -11,6 +13,16 @@ public class JsonBean {
     private String url;
     private Integer user_id;
     private Integer group_id;
+
+    private List<WaGroup> groups;
+
+    public List<WaGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<WaGroup> groups) {
+        this.groups = groups;
+    }
 
     public Integer getUser_id() {
         return user_id;
