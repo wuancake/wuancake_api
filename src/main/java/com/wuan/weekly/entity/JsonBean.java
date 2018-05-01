@@ -10,7 +10,6 @@ import java.util.List;
 public class JsonBean {
     private String infoText;
     private String infoCode;
-    private String url;
     private Integer user_id;
     private Integer group_id;
 
@@ -56,11 +55,5 @@ public class JsonBean {
         this.infoCode = infoCode;
     }
 
-    public String getUrl() {
-        return url;
-    }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

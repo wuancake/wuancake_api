@@ -23,4 +23,5 @@ public interface IUserService {
     Integer findUserGroupByUserId(Integer id);
 
     List<WaGroup> findAllGroupInfo();
+
 }

@@ -8,7 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.wuan.weekly.mapper")
 public class WuancakeApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WuancakeApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+
+        SpringApplication.run(WuancakeApiApplication.class, args);
+    }
 }
