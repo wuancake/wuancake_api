@@ -2,6 +2,7 @@ package com.wuan.weekly.controller;
 
 
 import com.wuan.weekly.entity.JsonBean;
+import com.wuan.weekly.entity.JsonRequestBody;
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.WaGroup;
 import com.wuan.weekly.service.imple.UserServiceImpl;
@@ -25,7 +26,7 @@ public class UserController {
 
     @RequestMapping(value = "regist")
     public @ResponseBody
-    JsonBean save(User user, HttpServletResponse response) {
+    JsonBean save(@RequestBody User user, HttpServletResponse response) {
         //设置四个后台变量
         user.setCreate_time(new Date());
         user.setModify_time(new Date());
@@ -41,7 +42,7 @@ public class UserController {
             jsonBean.setUser_id(userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword()).getId());
             jsonBean.setGroup_id(0);
         } catch (Exception e) {
-            infoText = "用户名或邮箱已占用";
+            infoText = "注册失败";
             response.setStatus(500);
             jsonBean.setInfoCode("500");
         }
@@ -53,33 +54,47 @@ public class UserController {
 
     @RequestMapping(value = "group")
     public @ResponseBody
-    JsonBean selectGroup(@RequestParam("user_id") Integer user_id, @RequestParam("group_id") Integer group_id, HttpServletResponse response) {
+    JsonBean selectGroup(@RequestBody JsonRequestBody jsonRequestBody, HttpServletResponse response) {
+        //获取json参数
+        Integer user_id = jsonRequestBody.getUser_id();
+        Integer group_id = jsonRequestBody.getGroup_id();
+        //查找用户是否存在
         User user = userService.findUserByUserId(user_id);
+        //默认两个值
         String infoText = "分组选择成功";
+        String infoCode = "200";
 
         JsonBean jsonBean = new JsonBean();
         if (user != null) {
             try {
+                //分组选择
                 userService.selectGroup(user, group_id);
-
+                //要返回的jsonBean
                 jsonBean.setUser_id(userService.findUserByUserId(user_id).getId());
                 jsonBean.setGroup_id(group_id);
             } catch (Exception e) {
                 infoText = "分组选择失败";
                 response.setStatus(500);
-                jsonBean.setInfoCode("500");
+                infoCode = "500";
             }
+        } else if (user == null) {
+            infoText = "没有这个用户";
+            response.setStatus(500);
+            infoCode = "500";
+        } else {
+            response.setStatus(200);
         }
+        jsonBean.setInfoCode(infoCode);
         jsonBean.setInfoText(infoText);
-        response.setStatus(200);
-        jsonBean.setInfoCode("200");
 
         return jsonBean;
     }
 
     @RequestMapping(value = "login")
     public @ResponseBody
-    JsonBean findUserByEmailAndPassword(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletResponse response) {
+    JsonBean findUserByEmailAndPassword(@RequestBody JsonRequestBody jsonRequestBody, HttpServletResponse response) {
+        String email = jsonRequestBody.getEmail();
+        String password = jsonRequestBody.getPassword();
         User user = userService.findUserByEmailAndPassword(email, password);
         String infoText = "登录成功已选择分组";
 
