@@ -1,24 +1,26 @@
-package com.wuan.weekly.entity;
+package com.wuan.weekly.entity.maggic;
 
-import java.util.Date;
+public class ReciveReport {
 
-/**
- * 查询周报后，返回给前端的信息
- * @author Maggic
- */
-public class ReportMsg extends Msg {
-	private int weekNum;
+	private int userId;
+	private int groupId;
 	private String complete;
 	private String trouble;
 	private String plane;
 	private String url;
-	private Date date;
 	
-	public int getWeekNum() {
-		return weekNum;
+
+	public int getUserId() {
+		return userId;
 	}
-	public void setWeekNum(int weekNum) {
-		this.weekNum = weekNum;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public int getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
 	}
 	public String getComplete() {
 		return complete;
@@ -43,12 +45,6 @@ public class ReportMsg extends Msg {
 	}
 	public void setUrl(String url) {
 		this.url = url;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	
 }

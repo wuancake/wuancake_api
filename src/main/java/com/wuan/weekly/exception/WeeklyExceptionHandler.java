@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wuan.weekly.entity.Msg;
-import com.wuan.weekly.entity.SubmitMsg;
+import com.wuan.weekly.entity.maggic.Msg;
+import com.wuan.weekly.entity.maggic.SubmitMsg;
 
 /**
  * 对周报发生的异常进行统一处理

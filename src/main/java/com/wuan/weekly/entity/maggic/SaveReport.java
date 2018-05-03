@@ -1,8 +1,14 @@
-package com.wuan.weekly.entity;
+package com.wuan.weekly.entity.maggic;
 
 import java.util.Date;
 
-public class Report {
+/**
+ * 保存的周报
+ * @author Maggic
+ *
+ */
+public class SaveReport {
+	
 	//周报星期数
 	private int weekNum;
 	//用户id
@@ -16,6 +22,17 @@ public class Report {
 	//回复时间
 	private Date replyTime;
 	
+	
+	public SaveReport(ReciveReport ReciveReport) {
+		this.userId = ReciveReport.getUserId();
+		this.groupId = ReciveReport.getGroupId();
+	}
+	
+	
+	public SaveReport() {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
 	public int getWeekNum() {
 		return weekNum;
 	}

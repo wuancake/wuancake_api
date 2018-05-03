@@ -1,4 +1,4 @@
-package com.wuan.weekly.entity;
+package com.wuan.weekly.entity.maggic;
 
 public class Msg {
 

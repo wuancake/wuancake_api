@@ -1,4 +1,4 @@
-package com.wuan.weekly.entity;
+package com.wuan.weekly.entity.maggic;
 
 /**
  * 提交周报后，返回给前端的信息
