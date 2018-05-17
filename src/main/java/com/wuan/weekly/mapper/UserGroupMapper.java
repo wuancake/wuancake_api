@@ -1,6 +1,5 @@
 package com.wuan.weekly.mapper;
 
-import com.wuan.weekly.entity.UserGroup;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;

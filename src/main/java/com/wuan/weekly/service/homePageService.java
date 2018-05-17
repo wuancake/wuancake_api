@@ -1,11 +1,10 @@
 package com.wuan.weekly.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.wuan.weekly.entity.Leave;
 import com.wuan.weekly.entity.Main;
 import com.wuan.weekly.mapper.homePageMapper;
@@ -14,14 +13,14 @@ import com.wuan.weekly.mapper.homePageMapper;
 public class homePageService {
 
 	@Autowired
-	homePageMapper mapper;
+	private homePageMapper mapper;
 	
 	public List<Leave> loadLeave(){
 		return null;
 	}
 	
 	
-	public Leave LeaveWeekly(
+	/*public Leave LeaveWeekly(
 			@RequestParam("groupId") int group_id,
 			@RequestParam("userId") int user_id,
 			@RequestParam("status") int status,
@@ -41,8 +40,20 @@ public class homePageService {
 		li.setInfoCode(200);
 		return li;
 		
+	}*/
+	/**
+	 * 向数据库提交请假周报
+	 */
+	public void leaveWeekly(Leave[] leave) {
+		for(int i = 0; i < leave.length; i++) {
+			//请假
+			mapper.leaveWeekly(leave[i],new Date());
+		}
 	}
 	
+	public void cancelLeave(int userId, int thisWeek) {
+		mapper.cancelLeave(userId,thisWeek);
+	}
 	
 	
 	public void page() {

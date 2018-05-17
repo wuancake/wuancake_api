@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WuancakeApiApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(WuancakeApiApplication.class, args);
     }
 }

@@ -1,13 +1,12 @@
 package com.wuan.weekly.entity;
 
-public class Leave extends Info{
+public class Leave {
 
 	private int leaveNum;
 	private int userId;
 	private int groupId;
 	private int status;
 	private String reason;
-	private String url;
 	
 	public int getLeaveNum() {
 		return leaveNum;
@@ -39,35 +38,25 @@ public class Leave extends Info{
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public String getUrl() {
-		return url;
+	public Leave() {
+		super();
 	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
-	public Leave(int leaveNum, int userId, int groupId, int status, String reason, String url) {
+	public Leave(int leaveNum, int userId, int groupId, int status, String reason) {
 		super();
 		this.leaveNum = leaveNum;
 		this.userId = userId;
 		this.groupId = groupId;
 		this.status = status;
 		this.reason = reason;
-		this.url = url;
 	}
-	
-	public Leave() {
-		super();
-	}
-	
 	@Override
 	public String toString() {
 		return "Leave [leaveNum=" + leaveNum + ", userId=" + userId + ", groupId=" + groupId + ", status=" + status
-				+ ", reason=" + reason + ", url=" + url + "]";
-	}
-	public void setWeekNum(int i) {
-		// TODO Auto-generated method stub
-		
+				+ ", reason=" + reason + "]";
 	}
 	
+	
+	
+
+
 }

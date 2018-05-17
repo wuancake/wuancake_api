@@ -1,5 +1,8 @@
 package com.wuan.weekly.mapper;
 
+import java.util.Date;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,5 +27,13 @@ public interface homePageMapper {
 
 	@Select("select status from report where user_id = #{userId}")
 	public int getStatus(@Param("userId") int id);
+	
+	
+	@Insert("insert into report (week_num,user_id,group_id,status,text,reply_time) values (#{leave.leaveNum},#{leave.userId},#{leave.groupId},#{leave.status},#{leave.reason},#{date})")
+	public void leaveWeekly(@Param("leave") Leave leave,@Param("date") Date date);
+
+	
+	@Delete("delete from report where user_id = #{userId} and week_num >= #{thisWeek}")
+	public void cancelLeave(@Param("userId") int userId,@Param("thisWeek") int thisWeek);
 	
 }

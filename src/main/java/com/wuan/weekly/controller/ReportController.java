@@ -1,7 +1,5 @@
 package com.wuan.weekly.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,26 +16,10 @@ import com.wuan.weekly.entity.maggic.User;
 import com.wuan.weekly.exception.CheckReportFailException;
 import com.wuan.weekly.exception.ReportFailException;
 import com.wuan.weekly.service.imple.WeeklyServiceImple;
+import com.wuan.weekly.util.Utils;
 
 @RestController
 public class ReportController {
-
-	/** 
-	 * 第一周第一天的日期
-	 */
-	private static final Date FIRSTDAY;
-
-	static { 
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		Date d = null;
-		try {
-			d  = format.parse("2015-10-26 00:00:00");
-		} catch (ParseException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}		
-		FIRSTDAY = d;
-	}
 
 	@Autowired
 	private WeeklyServiceImple weeklyServiceImple;
@@ -54,7 +36,7 @@ public class ReportController {
 		//根据字段生成周报内容
 		String text = reciveReport.getComplete() + reciveReport.getPlane() + reciveReport.getUrl();	
 		//周数算出来 提交时间-第一周的时间/一周的时间 
-		int weekNum = (int)((dt.getTime() - FIRSTDAY.getTime()) / (7*24*60*60*1000));
+		int weekNum = (int)((dt.getTime() - Utils.FIRSTDAY.getTime()) / (7*24*60*60*1000));
 		//生成周报
 		SaveReport report = new SaveReport(reciveReport);
 		report.setWeekNum(weekNum);
