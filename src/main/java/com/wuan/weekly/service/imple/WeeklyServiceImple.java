@@ -1,5 +1,7 @@
 package com.wuan.weekly.service.imple;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,9 @@ public class WeeklyServiceImple implements WeeklyService {
 	}
 
 	@Override
-	public SaveReport getReportByWeekNum(int weekNum,int userId) {
+	public List<SaveReport> getReportByWeekNum(int userId,int groupId ,int startReport, int reportNum) {
 		// TODO 自动生成的方法存根
-		SaveReport report = weeklyDao.getReportByWeekNum(weekNum,userId);
+		List<SaveReport> report = weeklyDao.getReportByWeekNum(userId,groupId,startReport,reportNum);
 		return report;
 	}
 

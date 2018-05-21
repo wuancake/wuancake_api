@@ -1,12 +1,14 @@
 package com.wuan.weekly.service;
 
+import java.util.List;
+
 import com.wuan.weekly.entity.maggic.SaveReport;
 
 public interface WeeklyService {
 	
-	public void reportWeekly(SaveReport report);
+	void reportWeekly(SaveReport report);
 
-	public SaveReport getReportByWeekNum(int weekNum, int userId);
+	List<SaveReport> getReportByWeekNum(int weekNum, int userId, int i, int weekNum2);
 
 	
 }
