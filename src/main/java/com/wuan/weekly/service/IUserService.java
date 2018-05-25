@@ -1,7 +1,6 @@
 package com.wuan.weekly.service;
 
 import com.wuan.weekly.entity.User;
-import com.wuan.weekly.entity.UserGroup;
 import com.wuan.weekly.entity.WaGroup;
 
 import java.util.List;

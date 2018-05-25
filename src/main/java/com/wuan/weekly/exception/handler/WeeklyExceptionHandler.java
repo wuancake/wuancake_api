@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wuan.weekly.entity.maggic.Msg;
-import com.wuan.weekly.entity.maggic.SubmitMsg;
 
 /**
  * 对周报发生的异常进行统一处理
@@ -19,7 +18,7 @@ public class WeeklyExceptionHandler {
 	@ResponseBody
 	@ExceptionHandler(value=com.wuan.weekly.exception.ReportFailException.class)
 	public Msg createSubmitReportFailMsg() {
-		Msg msg = new SubmitMsg();
+		Msg msg = new Msg();
 		msg.setInfoCode(500);
 		msg.setInfoText("提交周报失败");
 		return msg;	

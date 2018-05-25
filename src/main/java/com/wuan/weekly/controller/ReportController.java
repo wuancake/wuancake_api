@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wuan.weekly.entity.maggic.Msg;
-import com.wuan.weekly.entity.maggic.ReciveReport;
-import com.wuan.weekly.entity.maggic.SaveReport;
-import com.wuan.weekly.entity.maggic.SubmitMsg;
+import com.wuan.weekly.entity.maggic.Report;
+import com.wuan.weekly.entity.maggic.Reports;
 import com.wuan.weekly.exception.CheckReportFailException;
 import com.wuan.weekly.exception.ReportFailException;
 import com.wuan.weekly.service.imple.WeeklyServiceImple;
@@ -29,30 +28,29 @@ public class ReportController {
 	 * 提交周报
 	 */
 	@RequestMapping(value="/submit",method=RequestMethod.POST)
-	public Msg reportWeekly(@RequestBody ReciveReport reciveReport) {
+	public Msg reportWeekly(@RequestBody Report reciveReport) {
 		//设置周报状态为已提交
-		int status = 2;
+		final int status = 2;
 		//生成提交周报时间
 		Date dt = new Date();
 		//根据字段生成周报内容
 		String text = reciveReport.getComplete() + reciveReport.getPlane() + reciveReport.getUrl();	
 		//周数算出来 提交时间-第一周的时间/一周的时间 
 		int weekNum = (int)((dt.getTime() - Utils.FIRSTDAY.getTime()) / (7*24*60*60*1000));
-		//生成周报
-		SaveReport report = new SaveReport(reciveReport);
-		report.setWeekNum(weekNum);
-		report.setText(text);
-		report.setStatus(status);
-		report.setReplyTime(dt);
+		
+		reciveReport.setStatus(status);
+		reciveReport.setWeekNum(weekNum);
+		reciveReport.setText(text);
+		reciveReport.setReplyTime(dt);
 
 		try {
 			//像数据库提交周报
-			weeklyServiceImple.reportWeekly(report);
+			weeklyServiceImple.reportWeekly(reciveReport);
 		} catch(Exception e) {
 			throw new ReportFailException(e);
 		}
 		//像前端响应消息
-		Msg msg = new SubmitMsg();
+		Msg msg = new Msg();
 		msg.setInfoCode(200);
 		msg.setInfoText("成功提交周报");
 		return msg;
@@ -72,20 +70,24 @@ public class ReportController {
 		//分组id
 		int groupId = (int) page.get("groupId");
 		
-		Msg msg = null;
-		List<SaveReport> report = null;
+		List<Report> report = null;
+		Reports reports = new Reports();
 		try {
 			report = weeklyServiceImple.getReportByWeekNum(userId,groupId,pageNum*weekNum,weekNum);
+			//总的周报数
+			int count = weeklyServiceImple.getCountOfReport(userId,groupId); 
+			reports.setReports(report);
+			reports.setCount(count);
 		} catch(Exception e) {
 			throw new CheckReportFailException(e);
 		}
 		//找不到周报
 		if(report.isEmpty()) {
-			msg = new Msg();
+			Msg msg = new Msg();
 			msg.setInfoText("未提交");
 			msg.setInfoCode(200);
 			return msg;
 		}
-		return report;	
+		return reports;	
 	}
 }
