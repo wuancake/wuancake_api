@@ -14,8 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author
- * Date: 2018/3/23
+ * @author Date: 2018/3/23
  * Time: 22:44
  */
 @RestController
@@ -39,8 +38,13 @@ public class UserController {
 
         try {
             userService.saveUser(user);
-            jsonBean.setUser_id(userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword()).getId());
+            User userByEmailAndPassword = userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
+            //设置用户id
+            jsonBean.setUser_id(userByEmailAndPassword.getId());
+            //设置注册后的分组
             jsonBean.setGroup_id(0);
+            //设置用户名
+            jsonBean.setUser_name(user.getUser_name());
         } catch (Exception e) {
             infoText = "注册失败";
             response.setStatus(500);
@@ -49,6 +53,7 @@ public class UserController {
         jsonBean.setInfoText(infoText);
         response.setStatus(200);
         jsonBean.setInfoCode("200");
+
         return jsonBean;
     }
 
@@ -70,7 +75,7 @@ public class UserController {
                 //分组选择
                 userService.selectGroup(user, group_id);
                 //要返回的jsonBean
-                jsonBean.setUser_id(userService.findUserByUserId(user_id).getId());
+                jsonBean.setUser_id(user_id);
                 jsonBean.setGroup_id(group_id);
             } catch (Exception e) {
                 infoText = "分组选择失败";
@@ -95,9 +100,10 @@ public class UserController {
     JsonBean findUserByEmailAndPassword(@RequestBody JsonRequestBody jsonRequestBody, HttpServletResponse response) {
         String email = jsonRequestBody.getEmail();
         String password = jsonRequestBody.getPassword();
-        User user = userService.findUserByEmailAndPassword(email, password);
-        String infoText = "登录成功已选择分组";
 
+        User user = userService.findUserByEmailAndPassword(email, password);
+
+        String infoText = "登录成功已选择分组";
         JsonBean jsonBean = new JsonBean();
         if (user != null) {
             Integer user_id = user.getId();

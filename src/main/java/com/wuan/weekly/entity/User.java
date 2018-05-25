@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String wuan_name;
     private String password;
-    private Integer QQ;
+    private String QQ;
     private Integer auth = 0;
     private Integer deleteFlg = 0;
     private Date create_time;
@@ -18,16 +18,20 @@ public class User {
     public User() {
     }
 
-    public User(String user_name, String email, String wuan_name, String password, Integer QQ, Integer auth, Integer deleteFlg, Date create_time, Date modify_time) {
-        this.user_name = user_name;
-        this.email = email;
-        this.wuan_name = wuan_name;
-        this.password = password;
-        this.QQ = QQ;
-        this.auth = auth;
-        this.deleteFlg = deleteFlg;
-        this.create_time = create_time;
-        this.modify_time = modify_time;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", user_name='" + user_name + '\'' +
+                ", email='" + email + '\'' +
+                ", wuan_name='" + wuan_name + '\'' +
+                ", password='" + password + '\'' +
+                ", QQ='" + QQ + '\'' +
+                ", auth=" + auth +
+                ", deleteFlg=" + deleteFlg +
+                ", create_time=" + create_time +
+                ", modify_time=" + modify_time +
+                '}';
     }
 
     public Integer getId() {
@@ -70,11 +74,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getQQ() {
+    public String getQQ() {
         return QQ;
     }
 
-    public void setQQ(Integer QQ) {
+    public void setQQ(String QQ) {
         this.QQ = QQ;
     }
 

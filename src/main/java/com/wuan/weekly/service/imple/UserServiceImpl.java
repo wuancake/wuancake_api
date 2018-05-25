@@ -36,6 +36,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private WaGroupMapper waGroupMapper;
 
+    @Override
     public List<WaGroup> findAllGroupInfo() {
         return waGroupMapper.findAllGroupInfo();
     }
