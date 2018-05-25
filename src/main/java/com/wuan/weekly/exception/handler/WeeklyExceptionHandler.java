@@ -1,4 +1,4 @@
-package com.wuan.weekly.exception;
+package com.wuan.weekly.exception.handler;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
