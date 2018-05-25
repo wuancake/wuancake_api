@@ -86,36 +86,6 @@ public class ReportController {
 			msg.setInfoCode(200);
 			return msg;
 		}
-		/*switch(report.getStatus()) {
-		//查询的周数未提交
-		case 1: msg = new Msg();
-		msg.setInfoText("未提交");
-		msg.setInfoCode(200); break; 
-		//已提交
-		case 2:msg = createReportMsg(report, "成功返回周报", 200); break; 
-		//查询的周数已请假
-		case 3: msg = new Msg();
-		msg.setInfoText("已请假");
-		msg.setInfoCode(200); break;
-		}*/
 		return report;	
 	}
-
-	/**
-	 * 创建周报
-	 */
-	/*private ReportMsg createReportMsg(SaveReport report, String infoText, int infoCode) {
-		ReportMsg msg = new ReportMsg();
-		String[] text = report.getText().split("<br>");
-		msg.setWeekNum(report.getWeekNum());
-		msg.setComplete(text[0]);
-		msg.setTrouble(text[1]);
-		msg.setPlane(text[2]);
-		msg.setUrl(text[3]);
-		msg.setDate(report.getReplyTime());
-		msg.setInfoText(infoText);
-		msg.setInfoCode(infoCode);
-		return msg;
-	}*/
-
 }

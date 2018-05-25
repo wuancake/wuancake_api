@@ -24,7 +24,7 @@ public class homePageController {
 	@Autowired
 	private homePageService hps;
 
-	@GetMapping("/")
+	@GetMapping("/main")
 	public Main home(
 			@RequestParam(
 					required=false, 

@@ -76,7 +76,7 @@ public class homePageService {
 			ma.setWeekNum(0);
 			ma.setStatus(status);
 			ma.setInfoText("未提交");
-			ma.setInfoCode(301);
+			ma.setInfoCode(200);
 		} else {
 			if (status == 2) {
 				ma.setWeekNum(0);
