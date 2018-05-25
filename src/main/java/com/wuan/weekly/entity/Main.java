@@ -3,7 +3,7 @@ package com.wuan.weekly.entity;
 public class Main extends Info{
 
 	public int weekNum;
-	public static int status;
+	public int status;
 	private String url;
 	
 	public int getWeekNum() {
@@ -12,7 +12,7 @@ public class Main extends Info{
 	public void setWeekNum(int weekNum) {
 		this.weekNum = weekNum;
 	}
-	public static int getStatus() {
+	public int getStatus() {
 		return status;
 	}
 	public void setStatus(int status) {
