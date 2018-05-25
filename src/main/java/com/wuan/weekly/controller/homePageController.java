@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wuan.weekly.entity.Info;
@@ -25,12 +24,8 @@ public class homePageController {
 	private homePageService hps;
 
 	@GetMapping("/main")
-	public Main home(
-			@RequestParam(
-					required=false, 
-					name="id", 
-					defaultValue="2") int user_id) {
-
+	public Main home(@RequestBody Map<String, Object> map) {
+		int user_id = (int) map.get("user_id");
 		return hps.m(user_id);
 	}
 
