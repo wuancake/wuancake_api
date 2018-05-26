@@ -15,9 +15,9 @@ public interface IUserService {
 
     User findUserByUserId(Integer userId);
 
-    void selectGroup(User user, Integer groupId);
+    void selectGroup(User user, Integer groupId) throws Exception;
 
-    User findUserByEmailAndPassword(String email, String password);
+    User findUserByEmailAndPassword(String email, String password) throws Exception;
 
     Integer findUserGroupByUserId(Integer id);
 

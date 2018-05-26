@@ -1,4 +1,4 @@
-package com.wuan.weekly.filter;
+package com.wuan.weekly.web.filter;
 
 import java.io.IOException;
 
@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,7 +38,6 @@ public class OriginFilter implements Filter {
 
     @Override
     public void destroy() {
-        // TODO Auto-generated method stub
     }
 
 }

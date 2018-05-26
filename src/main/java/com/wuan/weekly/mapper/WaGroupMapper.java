@@ -18,4 +18,9 @@ public interface WaGroupMapper {
             @Result(property = "modifyTime", column = "modify_time")
     })
     List<WaGroup> findAllGroupInfo();
+
+    @Select("SELECT MAX(id) " +
+            "from wa_group")
+    Integer getMaxGroupId();
+
 }
