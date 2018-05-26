@@ -36,4 +36,27 @@ public class WeeklyExceptionHandler {
 		return msg;
 	}
 	
+	/**
+	 * 返回请求参数不正确的错误信息
+	 */
+	@ResponseBody
+	@ExceptionHandler(value=com.wuan.weekly.exception.ParamFormatException.class)
+	public Msg createParamError() {
+		Msg msg = new Msg();
+		msg.setInfoText("传入参数错误！");
+		msg.setInfoCode(500);
+		return msg;
+	}
+	
+	/**
+	 * 返回必填项为空的错误
+	 */
+	@ResponseBody
+	@ExceptionHandler(value=com.wuan.weekly.exception.NullTextException.class)
+	public Msg createNullMsgError() {
+		Msg msg = new Msg();
+		msg.setInfoText("必填项不能为空！");
+		msg.setInfoCode(500);
+		return msg;
+	}
 }

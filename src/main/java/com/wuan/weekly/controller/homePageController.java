@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wuan.weekly.entity.Info;
 import com.wuan.weekly.entity.Leave;
 import com.wuan.weekly.entity.Main;
+import com.wuan.weekly.exception.NullTextException;
+import com.wuan.weekly.exception.ParamFormatException;
 import com.wuan.weekly.service.homePageService;
 import com.wuan.weekly.util.Utils;
 
@@ -22,22 +24,31 @@ public class homePageController {
     private homePageService hps;
 
     @RequestMapping("/main")
-    public Main home(@RequestBody Map<String, Object> map) {
+    public Main home(@RequestBody Map<String, Object> map) throws ParamFormatException {
         int userId = (int) map.get("userId");
+        if (userId < 0) {
+        	throw new ParamFormatException("用户ID不正确！");
+		}
         return hps.m(userId);
     }
 
 
     @RequestMapping("/leave")
-    public Info leave(@RequestBody Leave li) {
+    public Info leave(@RequestBody Leave li) throws ParamFormatException, NullTextException {
         //请了多少周假
         int weekNum = li.getLeaveNum();
         //请假理由
-        String reason = li.getReason() + "<br>";
+        String reason = li.getReason();
         //用户id
         int userId = li.getUserId();
         //分组id
         int groupId = li.getGroupId();
+        if (weekNum < 0 || userId < 0 || groupId < 0) {
+        	throw new ParamFormatException("用户ID或分组ID不正确或请假周数不正确！");
+		}
+        if (reason == null || "".equals(reason)) {
+        	throw new NullTextException("必填项不能为空！");
+		}
         //生成请假周报
         Leave[] leaveReport = createLeaveReport(weekNum, reason, userId, groupId);
         try {

@@ -18,6 +18,12 @@ public class Msg {
 	public void setInfoCode(int infoCode) {
 		this.infoCode = infoCode;
 	}
-	
-	
+	public Msg(String infoText, int infoCode) {
+		super();
+		this.infoText = infoText;
+		this.infoCode = infoCode;
+	}
+	public Msg() {
+		super();
+	}
 }
