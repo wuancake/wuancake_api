@@ -24,7 +24,7 @@ public class LoginInterceptor extends WebMvcConfigurationSupport implements Hand
     protected void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration ir = registry.addInterceptor(new LoginInterceptor());
         ir.addPathPatterns("/**");
-        ir.excludePathPatterns("/regist", "/login", "/group");
+        ir.excludePathPatterns("/regist", "/login", "/findAllGroupInfo");
     }
 
     @Override
