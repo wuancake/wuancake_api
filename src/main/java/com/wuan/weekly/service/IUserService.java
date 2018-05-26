@@ -14,9 +14,9 @@ import java.util.List;
 public interface IUserService {
     void saveUser(User user) throws Exception;
 
-    User findUserByUserId(Integer user_id);
+    User findUserByUserId(Integer userId);
 
-    void selectGroup(User user, Integer group_id);
+    void selectGroup(User user, Integer groupId);
 
     User findUserByEmailAndPassword(String email, String password);
 

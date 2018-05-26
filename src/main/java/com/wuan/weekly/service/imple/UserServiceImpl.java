@@ -43,35 +43,35 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void saveUser(User user) throws Exception {
-        User userByUsernameAndEmail = userMapper.findUserByUsernameAndEmail(user.getUser_name(), user.getEmail());
+        User userByUsernameAndEmail = userMapper.findUserByUsernameAndEmail(user.getUserName(), user.getEmail());
         if (userByUsernameAndEmail == null) {
-            userMapper.saveUser(user.getUser_name(), user.getEmail(), user.getWuan_name(), user.getPassword(), user.getQQ(), user.getAuth(), user.getDeleteFlg(), user.getCreate_time(), user.getModify_time());
+            userMapper.saveUser(user.getUserName(), user.getEmail(), user.getWuanName(), user.getPassword(), user.getQQ(), user.getAuth(), user.getDeleteFlg(), user.getCreateTime(), user.getModifyTime());
         } else {
             throw new Exception();
         }
         //用户注册成功,增加对应的user_group表
         UserGroup userGroup = new UserGroup();
-        userGroup.setUser_id(userMapper.findUserByEmailAndPassword(user.getEmail(), user.getPassword()).getId());
-        userGroup.setGroup_id(0);//默认.JavaBean中也默认为0
-        userGroup.setCreate_time(user.getCreate_time());
-        userGroup.setModify_time(user.getModify_time());
-        userGroup.setDeleteFlg(0);//默认
-        userGroupMapper.selectGroup(userGroup.getUser_id(), userGroup.getGroup_id(), userGroup.getDeleteFlg(), userGroup.getCreate_time(), userGroup.getModify_time());
+        userGroup.setUserId(userMapper.findUserByEmailAndPassword(user.getEmail(), user.getPassword()).getId());
+        userGroup.setGroupId(0);
+        userGroup.setCreateTime(user.getCreateTime());
+        userGroup.setModifyTime(user.getModifyTime());
+        userGroup.setDeleteFlg(0);
+        userGroupMapper.selectGroup(userGroup.getUserId(), userGroup.getGroupId(), userGroup.getDeleteFlg(), userGroup.getCreateTime(), userGroup.getModifyTime());
         //对应的attend表
-        attendMapper.forUserAndGroup(userGroup.getUser_id(), userGroup.getGroup_id(), 1);
+        attendMapper.forUserAndGroup(userGroup.getUserId(), userGroup.getGroupId(), 1);
     }
 
 
     @Override
-    public User findUserByUserId(Integer user_id) {
-        return userMapper.findUserByUserId(user_id);
+    public User findUserByUserId(Integer userId) {
+        return userMapper.findUserByUserId(userId);
     }
 
     @Override
-    public void selectGroup(User user, Integer group_id) {
-        userGroupMapper.updateGroup(user.getId(), group_id);
+    public void selectGroup(User user, Integer groupId) {
+        userGroupMapper.updateGroup(user.getId(), groupId);
 
-        attendMapper.updateAttend(group_id, 1, user.getId());
+        attendMapper.updateAttend(groupId, 1, user.getId());
     }
 
     @Override

@@ -21,14 +21,14 @@ public class homePageService {
 	
 	
 	/*public Leave LeaveWeekly(
-			@RequestParam("groupId") int group_id,
-			@RequestParam("userId") int user_id,
+			@RequestParam("groupId") int groupId,
+			@RequestParam("userId") int userId,
 			@RequestParam("status") int status,
 			@RequestParam("leaveNum" )int leave_num,
 			@RequestParam("reason") String reason) {
 		Leave leave = new Leave();
-		leave.setGroupId(group_id);
-		leave.setUserId(user_id);
+		leave.setGroupId(groupId);
+		leave.setUserId(userId);
 		leave.setStatus(status);
 		leave.setLeaveNum(leave_num);
 		leave.setReason(reason);
@@ -64,9 +64,9 @@ public class homePageService {
 	}
 	
 	
-	public Main m(int user_id) {
+	public Main m(int userId) {
 		
-		int status = mapper.getStatus(user_id);
+		int status = mapper.getStatus(userId);
 //		System.out.println(status);
 //		int status = id%2;
 		

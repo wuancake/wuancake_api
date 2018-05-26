@@ -25,8 +25,8 @@ public class homePageController {
 
     @RequestMapping("/main")
     public Main home(@RequestBody Map<String, Object> map) {
-        int user_id = (int) map.get("user_id");
-        return hps.m(user_id);
+        int userId = (int) map.get("userId");
+        return hps.m(userId);
     }
 
 

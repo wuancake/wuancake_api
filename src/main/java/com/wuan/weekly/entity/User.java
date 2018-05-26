@@ -1,37 +1,39 @@
 package com.wuan.weekly.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class User {
     private Integer id;
-    private String user_name;
+    private String userName;
     private String email;
-    private String wuan_name;
+    private String wuanName;
     private String password;
+    @JsonProperty(value = "QQ")
     private String QQ;
     private Integer auth = 0;
     private Integer deleteFlg = 0;
-    private Date create_time;
-    private Date modify_time;
-
-
-    public User() {
-    }
+    private Date createTime;
+    private Date modifyTime;
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", user_name='" + user_name + '\'' +
+                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
-                ", wuan_name='" + wuan_name + '\'' +
+                ", wuanName='" + wuanName + '\'' +
                 ", password='" + password + '\'' +
                 ", QQ='" + QQ + '\'' +
                 ", auth=" + auth +
                 ", deleteFlg=" + deleteFlg +
-                ", create_time=" + create_time +
-                ", modify_time=" + modify_time +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
                 '}';
+    }
+
+    public User() {
     }
 
     public Integer getId() {
@@ -42,12 +44,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -58,12 +60,12 @@ public class User {
         this.email = email;
     }
 
-    public String getWuan_name() {
-        return wuan_name;
+    public String getWuanName() {
+        return wuanName;
     }
 
-    public void setWuan_name(String wuan_name) {
-        this.wuan_name = wuan_name;
+    public void setWuanName(String wuanName) {
+        this.wuanName = wuanName;
     }
 
     public String getPassword() {
@@ -98,19 +100,19 @@ public class User {
         this.deleteFlg = deleteFlg;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getModify_time() {
-        return modify_time;
+    public Date getModifyTime() {
+        return modifyTime;
     }
 
-    public void setModify_time(Date modify_time) {
-        this.modify_time = modify_time;
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

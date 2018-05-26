@@ -8,26 +8,26 @@ import java.util.Date;
  * Time: 0:18
  */
 public class UserGroup {
-    private Integer user_id;
-    private Integer group_id = 0;
+    private Integer userId;
+    private Integer groupId = 0;
     private Integer deleteFlg = 0;
-    private Date create_time;
-    private Date modify_time;
+    private Date createTime;
+    private Date modifyTime;
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getGroup_id() {
-        return group_id;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setGroup_id(Integer group_id) {
-        this.group_id = group_id;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
     public Integer getDeleteFlg() {
@@ -38,19 +38,19 @@ public class UserGroup {
         this.deleteFlg = deleteFlg;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getModify_time() {
-        return modify_time;
+    public Date getModifyTime() {
+        return modifyTime;
     }
 
-    public void setModify_time(Date modify_time) {
-        this.modify_time = modify_time;
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }
