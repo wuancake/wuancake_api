@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wuan.weekly.entity.maggic.Msg;
@@ -29,6 +30,7 @@ public class ReportController {
 	/**
 	 * 提交周报
 	 */
+	@ResponseBody
 	@RequestMapping(value="/submit",method=RequestMethod.POST)
 	public Msg reportWeekly(@RequestBody Report reciveReport) throws ParamFormatException, NullTextException {
 		//对请求参数进行检查
@@ -68,6 +70,7 @@ public class ReportController {
 	/**
 	 * 查看周报
 	 */
+	@ResponseBody
 	@RequestMapping(value="/myweekly",method=RequestMethod.POST)
 	public Object getReport(@RequestBody Map<String,Object> page) throws ParamFormatException {
 		//当前第几页

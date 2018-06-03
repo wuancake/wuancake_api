@@ -34,7 +34,7 @@ public class homePageController {
         return hps.m(userId);
     }
 
-
+    @ResponseBody
     @RequestMapping("/leave")
     public Info leave(@RequestBody Leave li) throws ParamFormatException, NullTextException {
         //请了多少周假
@@ -65,7 +65,7 @@ public class homePageController {
         //成功请假
         return new Info("请假成功", 200);
     }
-
+    @ResponseBody
     @RequestMapping(value = "/cancelLeave", method = RequestMethod.POST)
     public Info cancelLeave(@RequestBody Map<String, Object> param) {
         int userId = (int) param.get("userId");
