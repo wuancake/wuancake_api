@@ -77,13 +77,13 @@ public class homePageService {
 		System.out.println(status);
 		Main ma = new Main();
 		if (status == 1) {
-			ma.setWeekNum(0);
+			ma.setWeekNum(thisWeek);
 			ma.setStatus(status);
 			ma.setInfoText("未提交");
 			ma.setInfoCode(200);
 		} else {
 			if (status == 2) {
-				ma.setWeekNum(0);
+				ma.setWeekNum(thisWeek);
 				ma.setStatus(status);
 				ma.setInfoText("已提交");
 				ma.setInfoCode(200);
@@ -93,7 +93,7 @@ public class homePageService {
 				ma.setInfoText("服务器错误");
 			}
 			else {
-				ma.setWeekNum(0);
+				ma.setWeekNum(thisWeek);
 				ma.setStatus(status);
 				ma.setInfoText("已请假");
 				ma.setInfoCode(200);

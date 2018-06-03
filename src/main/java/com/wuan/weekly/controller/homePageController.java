@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wuan.weekly.entity.Info;
@@ -23,6 +24,7 @@ public class homePageController {
     @Autowired
     private homePageService hps;
 
+    @ResponseBody
     @RequestMapping("/main")
     public Main home(@RequestBody Map<String, Object> map) throws ParamFormatException {
         int userId = (int) map.get("userId");

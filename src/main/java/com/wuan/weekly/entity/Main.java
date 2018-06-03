@@ -4,7 +4,6 @@ public class Main extends Info{
 
 	public int weekNum;
 	public int status;
-	private String url;
 	
 	public int getWeekNum() {
 		return weekNum;
@@ -18,28 +17,23 @@ public class Main extends Info{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
 	
 	
-	public Main(int weekNum, String url) {
+	
+	public Main(int weekNum) {
 		super();
 		this.weekNum = weekNum;
-		this.url = url;
 	}
 	
 	
 	public Main() {
 		super();
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "main [weekNum=" + weekNum + ", status=" + status + ", url=" + url + "]";
+		return "Main [weekNum=" + weekNum + ", status=" + status + "]";
 	}
+	
+	
+
 }
