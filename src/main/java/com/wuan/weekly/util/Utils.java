@@ -1,8 +1,5 @@
 package com.wuan.weekly.util;
 
-import com.wuan.weekly.entity.JsonBean;
-
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

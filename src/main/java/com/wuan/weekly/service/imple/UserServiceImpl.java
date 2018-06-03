@@ -8,7 +8,6 @@ import com.wuan.weekly.mapper.UserGroupMapper;
 import com.wuan.weekly.mapper.UserMapper;
 import com.wuan.weekly.mapper.WaGroupMapper;
 import com.wuan.weekly.service.IUserService;
-import com.wuan.weekly.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

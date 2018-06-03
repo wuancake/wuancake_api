@@ -8,12 +8,12 @@ public class ReportFailException extends RuntimeException {
 	private static final long serialVersionUID = -4031428632082701899L;
 
 	public ReportFailException(Exception e) {
-		System.out.println("提交周报失败");
+		System.err.println("提交周报失败");
 		e.printStackTrace();	
 	}
 	
 	public ReportFailException() {
 		super();
-		System.out.println("提交周报失败");
+		System.err.println("提交周报失败");
 	}
 }
