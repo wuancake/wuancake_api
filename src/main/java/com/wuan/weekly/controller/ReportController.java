@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import com.wuan.weekly.entity.maggic.Msg;
 import com.wuan.weekly.entity.maggic.Report;
 import com.wuan.weekly.entity.maggic.Reports;
 import com.wuan.weekly.exception.CheckReportFailException;
+import com.wuan.weekly.exception.NotLoginException;
 import com.wuan.weekly.exception.NullTextException;
 import com.wuan.weekly.exception.ParamFormatException;
 import com.wuan.weekly.exception.ReportFailException;
@@ -29,10 +32,11 @@ public class ReportController {
 
 	/**
 	 * 提交周报
+	 * @throws NotLoginException 
 	 */
 	@ResponseBody
 	@RequestMapping(value="/submit",method=RequestMethod.POST)
-	public Msg reportWeekly(@RequestBody Report reciveReport) throws ParamFormatException, NullTextException {
+	public Msg reportWeekly(@RequestBody Report reciveReport,HttpServletRequest request) throws ParamFormatException, NullTextException {
 		//对请求参数进行检查
 		if(reciveReport.getUserId() < 0 || reciveReport.getGroupId() < 0) {
 			throw new ParamFormatException("用户ID或分组ID不正确！");
@@ -40,7 +44,7 @@ public class ReportController {
 		if ("".equals(reciveReport.getComplete()) || null == reciveReport || "".equals(reciveReport.getTrouble()) || null == reciveReport.getTrouble() || "".equals(reciveReport.getPlane()) || null == reciveReport.getPlane()) {
 			throw new NullTextException("必填项不能为空！");
 		}
-		
+
 		//设置周报状态为已提交
 		final int status = 2;
 		//生成提交周报时间
@@ -81,7 +85,7 @@ public class ReportController {
 		int userId = (int) page.get("userId");
 		//分组id
 		int groupId = (int) page.get("groupId");
-		
+
 		if (groupId < 0 || userId < 0 || pageNum < 0 || weekNum < 0) {
 			throw new ParamFormatException("用户ID或分组ID不正确或请求页数不正确或周报份数不正确！");
 		}

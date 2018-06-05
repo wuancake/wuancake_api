@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RestController
 public class UserController {
-    private static final String SESSION_NAME = "9527";
+    public static final String SESSION_NAME = "9527";
     @Autowired
     private UserServiceImpl userService;
 

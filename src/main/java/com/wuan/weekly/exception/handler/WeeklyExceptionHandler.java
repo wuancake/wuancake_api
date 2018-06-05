@@ -59,4 +59,16 @@ public class WeeklyExceptionHandler {
 		msg.setInfoCode(500);
 		return msg;
 	}
+	
+	/**
+	 * 返回必填项为空的错误
+	 */
+	@ResponseBody
+	@ExceptionHandler(value=com.wuan.weekly.exception.NotLoginException.class)
+	public Msg notLoginError() {
+		Msg msg = new Msg();
+		msg.setInfoText("请先登录！");
+		msg.setInfoCode(500);
+		return msg;
+	}
 }
