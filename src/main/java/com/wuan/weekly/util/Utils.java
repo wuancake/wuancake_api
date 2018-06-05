@@ -10,7 +10,7 @@ public class Utils {
      * 第一周第一天的日期
      */
     public static final Date FIRSTDAY;
-    private static final String SESSION_NAME = "9527";
+    //private static final String SESSION_NAME = "9527";
 
     static {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

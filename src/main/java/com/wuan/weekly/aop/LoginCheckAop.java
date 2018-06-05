@@ -16,8 +16,9 @@ import com.wuan.weekly.exception.NotLoginException;
  * @author Administrator
  *
  */
+@SuppressWarnings("unused")
 @Aspect
-@Component
+//@Component
 public class LoginCheckAop {
 
 	@Autowired

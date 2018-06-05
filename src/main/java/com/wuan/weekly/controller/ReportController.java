@@ -95,9 +95,6 @@ public class ReportController {
 		try {
 			//总的周报数
 			int count = weeklyServiceImple.getCountOfReport(userId,groupId); 
-			if (count < pageNum*weekNum) {
-				throw new CheckReportFailException();
-			}
 			//取出周报
 			report = weeklyServiceImple.getReportByWeekNum(userId,groupId,pageNum*weekNum,weekNum);
 			reports.setReports(report);
