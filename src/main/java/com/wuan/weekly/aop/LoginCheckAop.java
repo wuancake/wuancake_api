@@ -23,11 +23,11 @@ public class LoginCheckAop {
 	@Autowired
 	private	HttpServletRequest request;
 
-	@Pointcut("execution(* com.wuan.weekly.controller.homePageController.*(..)) || execution(* com.wuan.weekly.controller.ReportController.*(..))")  
-	public void executeService(){}  
+	@Pointcut("execution(* com.wuan.weekly.controller.homePageController.*(..)) || execution(* com.wuan.weekly.controller.ReportController.*(..))")
+	public void executeService(){}
 
 
-	@Before("executeService()") 
+	@Before("executeService()")
 	public void checkLogin() throws NotLoginException {
 		if (request.getSession().getAttribute(UserController.SESSION_NAME) == null) {
 			throw new NotLoginException();
