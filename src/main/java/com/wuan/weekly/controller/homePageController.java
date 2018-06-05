@@ -38,7 +38,7 @@ public class homePageController {
     @RequestMapping("/leave")
     public Info leave(@RequestBody Leave li) throws ParamFormatException, NullTextException {
         //请了多少周假
-        int weekNum = li.getLeaveNum();
+        int weekNum = li.getWeekNum();
         //请假理由
         String reason = li.getReason();
         //用户id
@@ -58,6 +58,7 @@ public class homePageController {
         } catch (Exception e) {
             //如果在往数据库里更新请假出现问题，事务回滚
             //当前周数
+        	e.printStackTrace();
             int thisWeek = (int) ((new Date().getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
             hps.cancelLeave(userId, thisWeek);
             return new Info("请假失败", 500);

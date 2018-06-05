@@ -2,18 +2,13 @@ package com.wuan.weekly.entity;
 
 public class Leave {
 
-	private int leaveNum;
+	private int weekNum;
 	private int userId;
 	private int groupId;
 	private int status;
 	private String reason;
 	
-	public int getLeaveNum() {
-		return leaveNum;
-	}
-	public void setLeaveNum(int leaveNum) {
-		this.leaveNum = leaveNum;
-	}
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -43,7 +38,7 @@ public class Leave {
 	}
 	public Leave(int leaveNum, int userId, int groupId, int status, String reason) {
 		super();
-		this.leaveNum = leaveNum;
+		this.weekNum = leaveNum;
 		this.userId = userId;
 		this.groupId = groupId;
 		this.status = status;
@@ -51,8 +46,14 @@ public class Leave {
 	}
 	@Override
 	public String toString() {
-		return "Leave [leaveNum=" + leaveNum + ", userId=" + userId + ", groupId=" + groupId + ", status=" + status
+		return "Leave [leaveNum=" + weekNum + ", userId=" + userId + ", groupId=" + groupId + ", status=" + status
 				+ ", reason=" + reason + "]";
+	}
+	public int getWeekNum() {
+		return weekNum;
+	}
+	public void setWeekNum(int weekNum) {
+		this.weekNum = weekNum;
 	}
 	
 	
