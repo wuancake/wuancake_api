@@ -25,7 +25,6 @@ public class WeeklyServiceImple implements WeeklyService {
 	public List<Report> getReportByWeekNum(int userId,int groupId ,int startReport, int reportNum) {
 		// TODO 自动生成的方法存根
 		List<Report> report = weeklyDao.getReportByWeekNum(userId,groupId,startReport,reportNum);
-		System.out.println(report);
 		return report;
 	}
 
