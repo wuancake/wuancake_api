@@ -3,7 +3,6 @@ package com.wuan.weekly.service.imple;
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.UserGroup;
 import com.wuan.weekly.entity.WaGroup;
-import com.wuan.weekly.mapper.AttendMapper;
 import com.wuan.weekly.mapper.UserGroupMapper;
 import com.wuan.weekly.mapper.UserMapper;
 import com.wuan.weekly.mapper.WaGroupMapper;
@@ -33,9 +32,6 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserGroupMapper userGroupMapper;
-
-    @Autowired
-    private AttendMapper attendMapper;
 
     @Autowired
     private WaGroupMapper waGroupMapper;
@@ -84,6 +80,7 @@ public class UserServiceImpl implements IUserService {
         User userByUsernameAndEmail = userMapper.findUserByUsernameAndEmail(userName, email);
         if (userByUsernameAndEmail == null) {
             userMapper.saveUser(userName, email, user.getWuanName(), password, qq, auth, deleteFlg, createTime, modifyTime);
+
         } else {
             throw new Exception("用户名或邮箱已存在");
         }
@@ -98,7 +95,7 @@ public class UserServiceImpl implements IUserService {
         userGroup.setDeleteFlg(0);
         userGroupMapper.selectGroup(userGroup.getUserId(), userGroup.getGroupId(), userGroup.getDeleteFlg(), userGroup.getCreateTime(), userGroup.getModifyTime());
         //对应的attend表
-        attendMapper.forUserAndGroup(userGroup.getUserId(), userGroup.getGroupId(), 2);
+        //attendMapper.forUserAndGroup(userGroup.getUserId(), userGroup.getGroupId(), 2);
     }
 
 
@@ -119,7 +116,7 @@ public class UserServiceImpl implements IUserService {
 
         userGroupMapper.updateGroup(user.getId(), groupId);
 
-        attendMapper.updateAttend(groupId, 1, user.getId());
+        // attendMapper.updateAttend(groupId, 1, user.getId());
     }
 
     @Override
