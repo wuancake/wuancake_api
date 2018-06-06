@@ -2,7 +2,7 @@ package com.wuan.weekly.entity.maggic;
 
 import java.util.Date;
 
-public class Report {
+public class Report implements Comparable<Report> {
 
 	//用户id
 	private int userId;
@@ -93,9 +93,60 @@ public class Report {
 				+ ", plane=" + plane + ", url=" + url + ", text=" + text + ", status=" + status + ", replyTime="
 				+ replyTime + ", weekNum=" + weekNum + "]";
 	}
+
+	@Override
+	public int compareTo(Report o) {
+		return o.weekNum > this.weekNum ? 1 : o.weekNum < this.weekNum ? -1 : 0;
+	}
 	
-	
-	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Report other = (Report) obj;
+		if (complete == null) {
+			if (other.complete != null)
+				return false;
+		} else if (!complete.equals(other.complete))
+			return false;
+		if (groupId != other.groupId)
+			return false;
+		if (plane == null) {
+			if (other.plane != null)
+				return false;
+		} else if (!plane.equals(other.plane))
+			return false;
+		if (replyTime == null) {
+			if (other.replyTime != null)
+				return false;
+		} else if (!replyTime.equals(other.replyTime))
+			return false;
+		if (status != other.status)
+			return false;
+		if (text == null) {
+			if (other.text != null)
+				return false;
+		} else if (!text.equals(other.text))
+			return false;
+		if (trouble == null) {
+			if (other.trouble != null)
+				return false;
+		} else if (!trouble.equals(other.trouble))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		if (userId != other.userId)
+			return false;
+		if (weekNum != other.weekNum)
+			return false;
+		return true;
+	}
 
 }

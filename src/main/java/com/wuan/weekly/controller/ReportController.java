@@ -3,6 +3,8 @@ package com.wuan.weekly.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -94,10 +96,15 @@ public class ReportController {
 		Reports reports = new Reports();
 		try {
 			//总的周报数
-			int count = weeklyServiceImple.getCountOfReport(userId,groupId); 
-			//取出周报
-			report = weeklyServiceImple.getReportByWeekNum(userId,groupId,pageNum*weekNum,weekNum);
-			reports.setReports(report);
+			int count = weeklyServiceImple.getCountOfReport(userId,groupId);
+			int limit = count - (pageNum * weekNum);
+			//从limit周开始取，取weekNum个数的周的周报
+			report = weeklyServiceImple.getReportByWeekNum(userId,groupId,limit,weekNum);
+			Set<Report> set = new TreeSet<>();
+			for(Report rep : report) {
+				set.add(rep);
+			}
+			reports.setReports(set);
 			reports.setCount(count);
 		} catch(Exception e) {
 			throw new CheckReportFailException();
