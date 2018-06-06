@@ -6,6 +6,7 @@ import com.wuan.weekly.entity.JsonRequestBody;
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.WaGroup;
 import com.wuan.weekly.service.imple.UserServiceImpl;
+import com.wuan.weekly.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,10 +37,13 @@ public class UserController {
         if (user.getWuanName() == null) {
             user.setWuanName(user.getUserName());
         }
+        //MD5加盐
+        String password = MD5Utils.generate(user.getPassword());
+        user.setPassword(password);
 
         try {
             userService.saveUser(user);
-            User userByEmailAndPassword = userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
+            User userByEmailAndPassword = userService.findUserByEmail(user.getEmail());
             //设置用户id
             jsonBean.setUserId(userByEmailAndPassword.getId());
             //设置注册后的分组
@@ -104,33 +108,38 @@ public class UserController {
         String email = jsonRequestBody.getEmail();
         String password = jsonRequestBody.getPassword();
 
-        User user = userService.findUserByEmailAndPassword(email, password);
-        String infoText = "登录成功已选择分组";
-
         JsonBean jsonBean = new JsonBean();
-        if (user != null) {
-            Integer userId = user.getId();
-            Integer groupId = userService.findUserGroupByUserId(userId);
-            jsonBean.setInfoText(infoText);
-            jsonBean.setUserId(user.getId());
-            jsonBean.setGroupId(groupId);
 
-            if (groupId == 0) {
-                infoText = "登录成功未选择分组";
-            }
-            jsonBean.setInfoText(infoText);
-            response.setStatus(200);
-            jsonBean.setInfoCode("200");
-            jsonBean.setUserName(user.getUserName());
-            request.getSession().setAttribute("9527", user);
+        User user = userService.findUserByEmail(jsonRequestBody.getEmail());
+
+        if (user == null) {
+            jsonBean.setInfoText("邮箱错误");
+            jsonBean.setInfoCode("500");
+            response.setStatus(500);
             return jsonBean;
         } else {
-            infoText = "邮箱或密码错误";
-            response.setStatus(500);
-            jsonBean.setInfoCode("500");
-            jsonBean.setInfoText(infoText);
-            return jsonBean;
+            boolean verify = MD5Utils.verify(password, user.getPassword());
+            if (!verify) {
+                jsonBean.setInfoText("密码错误");
+                jsonBean.setInfoCode("500");
+                response.setStatus(500);
+                return jsonBean;
+            } else {
+                Integer userId = user.getId();
+                Integer groupId = userService.findUserGroupByUserId(userId);
+                jsonBean.setUserId(user.getId());
+                jsonBean.setGroupId(groupId);
+                jsonBean.setUserName(user.getUserName());
+                jsonBean.setInfoText("登录成功已选择分组");
+                if (groupId == 0) {
+                    jsonBean.setInfoText("登录成功未选择分组");
+                }
+                response.setStatus(200);
+                jsonBean.setInfoCode("200");
+                return jsonBean;
+            }
         }
+
     }
 
     @RequestMapping(value = "findAllGroupInfo")

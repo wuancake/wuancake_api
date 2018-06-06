@@ -17,10 +17,9 @@ public interface IUserService {
 
     void selectGroup(User user, Integer groupId) throws Exception;
 
-    User findUserByEmailAndPassword(String email, String password) throws Exception;
-
     Integer findUserGroupByUserId(Integer id);
 
     List<WaGroup> findAllGroupInfo();
 
+    User findUserByEmail(String email);
 }
