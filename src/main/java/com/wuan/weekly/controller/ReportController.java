@@ -88,7 +88,7 @@ public class ReportController {
 		//分组id
 		int groupId = (int) page.get("groupId");
 
-		if (groupId < 0 || userId < 0 || pageNum < 0 || weekNum < 0) {
+		if (groupId < 0 || userId < 0 || pageNum <= 0 || weekNum < 0) {
 			throw new ParamFormatException("用户ID或分组ID不正确或请求页数不正确或周报份数不正确！");
 		}
 
