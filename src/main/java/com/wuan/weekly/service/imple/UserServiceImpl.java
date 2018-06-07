@@ -82,7 +82,7 @@ public class UserServiceImpl implements IUserService {
         /*
         -------------------------------------------------------------------------------------------------
          */
-        User userByUsernameAndEmail = userMapper.findUserByUsernameAndEmail(userName, email);
+        User userByUsernameAndEmail = userMapper.findUserByUsernameAndEmailAndQQ(userName, email, qq);
         if (userByUsernameAndEmail == null) {
             userMapper.saveUser(userName, email, user.getWuanName(), password, qq, auth, deleteFlg, createTime, modifyTime);
 
