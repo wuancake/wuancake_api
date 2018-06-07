@@ -13,8 +13,6 @@ import java.util.Date;
  */
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM user WHERE email = #{email} AND password = #{password}")
-    User findUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
     @Select("SELECT * FROM user WHERE id = #{userId}")
     User findUserByUserId(@Param("userId") Integer userId);
@@ -28,4 +26,6 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE user_name = #{userName} OR email = #{email}")
     User findUserByUsernameAndEmail(@Param("userName") String userName, @Param("email") String email);
 
+    @Select("select * from user where email = #{email}")
+    User findUserByEmail(@Param("email") String email);
 }

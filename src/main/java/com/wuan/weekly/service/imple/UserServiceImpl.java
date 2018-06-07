@@ -42,6 +42,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public User findUserByEmail(String email) {
+        return userMapper.findUserByEmail(email);
+    }
+
+    @Override
     public void saveUser(User user) throws Exception {
         /*
         增强接口健壮性
@@ -86,7 +91,7 @@ public class UserServiceImpl implements IUserService {
         }
         //用户注册成功,增加对应的user_group表
         UserGroup userGroup = new UserGroup();
-        userGroup.setUserId(userMapper.findUserByEmailAndPassword(email, password).getId());
+        userGroup.setUserId(userMapper.findUserByEmail(email).getId());
         //注册后就是没有选择分组的0
         userGroup.setGroupId(0);
         userGroup.setCreateTime(createTime);
@@ -117,11 +122,6 @@ public class UserServiceImpl implements IUserService {
         userGroupMapper.updateGroup(user.getId(), groupId);
 
         // attendMapper.updateAttend(groupId, 1, user.getId());
-    }
-
-    @Override
-    public User findUserByEmailAndPassword(String email, String password) {
-        return userMapper.findUserByEmailAndPassword(email, password);
     }
 
     @Override
