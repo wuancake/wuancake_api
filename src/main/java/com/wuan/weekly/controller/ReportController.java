@@ -44,7 +44,7 @@ public class ReportController {
         if (reciveReport.getUserId() <= 0 || reciveReport.getGroupId() <= 0) {
             throw new ParamFormatException("用户ID或分组ID不正确！");
         }
-        if ("".equals(reciveReport.getComplete()) || null == reciveReport || "".equals(reciveReport.getTrouble()) || null == reciveReport.getTrouble() || "".equals(reciveReport.getPlane()) || null == reciveReport.getPlane()) {
+        if ("".equals(reciveReport.getComplete()) || null == reciveReport.getComplete() || "".equals(reciveReport.getTrouble()) || null == reciveReport.getTrouble() || "".equals(reciveReport.getPlane()) || null == reciveReport.getPlane()) {
             throw new NullTextException("必填项不能为空！");
         }
 
