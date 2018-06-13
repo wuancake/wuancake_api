@@ -5,6 +5,7 @@ import com.wuan.weekly.entity.JsonBean;
 import com.wuan.weekly.entity.JsonRequestBody;
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.WaGroup;
+import com.wuan.weekly.mapper.WaGroupMapper;
 import com.wuan.weekly.service.imple.UserServiceImpl;
 import com.wuan.weekly.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class UserController {
     public static final String SESSION_NAME = "9527";
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private WaGroupMapper waGroupMapper;
 
     @RequestMapping(value = "regist")
     public @ResponseBody
@@ -127,6 +130,7 @@ public class UserController {
                 if (groupId == 0) {
                     jsonBean.setInfoText("登录成功未选择分组");
                 }
+                jsonBean.setGroupName(waGroupMapper.getGroupNameByGroupId(groupId));
                 jsonBean.setInfoCode("200");
                 return jsonBean;
             }

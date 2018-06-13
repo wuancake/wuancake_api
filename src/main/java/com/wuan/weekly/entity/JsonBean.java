@@ -14,6 +14,15 @@ public class JsonBean {
     private Integer userId;
     private Integer groupId;
     private String userName;
+    private String groupName;
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 
     private List<WaGroup> groups;
 
