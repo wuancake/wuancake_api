@@ -38,7 +38,7 @@ public class ReportController {
      * @throws NotLoginException
      */
     @ResponseBody
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    @RequestMapping(value = "/submit", method = RequestMethod.POST,produces="application/json;charset=UTF-8")
     public Msg reportWeekly(@RequestBody Report reciveReport, HttpServletRequest request) throws ParamFormatException, NullTextException {
         //对请求参数进行检查
         if (reciveReport.getUserId() <= 0 || reciveReport.getGroupId() <= 0) {
@@ -47,7 +47,6 @@ public class ReportController {
         if ("".equals(reciveReport.getComplete()) || null == reciveReport.getComplete() || "".equals(reciveReport.getTrouble()) || null == reciveReport.getTrouble() || "".equals(reciveReport.getPlane()) || null == reciveReport.getPlane()) {
             throw new NullTextException("必填项不能为空！");
         }
-
         //设置周报状态为已提交
         final int status = 2;
         //生成提交周报时间
@@ -56,7 +55,7 @@ public class ReportController {
         String text = reciveReport.getComplete() + reciveReport.getTrouble() + reciveReport.getPlane() + reciveReport.getUrl();
         //周数算出来 提交时间-第一周的时间/一周的时间
         int weekNum = (int) ((dt.getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
-
+        System.out.println(text);
         reciveReport.setStatus(status);
         reciveReport.setWeekNum(weekNum);
         reciveReport.setText(text);
@@ -78,7 +77,7 @@ public class ReportController {
      * 查看周报
      */
     @ResponseBody
-    @RequestMapping(value = "/myweekly", method = RequestMethod.POST)
+    @RequestMapping(value = "/myweekly", method = RequestMethod.POST,produces="application/json;charset=UTF-8")
     public Object getReport(@RequestBody Map<String, Object> page) throws ParamFormatException {
         //当前第几页（页数从1开始）
         int pageNum = (int) page.get("pageNum");

@@ -1,8 +1,6 @@
 package com.wuan.weekly.service;
 
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.wuan.weekly.entity.Leave;
@@ -16,32 +14,8 @@ public class homePageService {
 	@Autowired
 	private homePageMapper mapper;
 	
-	public List<Leave> loadLeave(){
-		return null;
-	}
+
 	
-	
-	/*public Leave LeaveWeekly(
-			@RequestParam("groupId") int group_id,
-			@RequestParam("userId") int user_id,
-			@RequestParam("status") int status,
-			@RequestParam("leaveNum" )int leave_num,
-			@RequestParam("reason") String reason) {
-		Leave leave = new Leave();
-		leave.setGroupId(group_id);
-		leave.setUserId(user_id);
-		leave.setStatus(status);
-		leave.setLeaveNum(leave_num);
-		leave.setReason(reason);
-		
-		Leave li = new Leave();
-		li.setWeekNum(0);
-		li.setStatus(3);
-		li.setInfoText("请假成功");
-		li.setInfoCode(200);
-		return li;
-		
-	}*/
 	/**
 	 * 向数据库提交请假周报
 	 */
@@ -52,18 +26,14 @@ public class homePageService {
 		}
 	}
 	
-	public void cancelLeave(int userId, int thisWeek) {
-		mapper.cancelLeave(userId,thisWeek);
+	/**
+	 * 取消请假
+	 * @param userId
+	 * @param thisWeek
+	 */
+	public void cancelLeave(int userId,int groupId, int thisWeek) {
+		mapper.cancelLeave(userId,groupId,thisWeek);
 	}
-	
-	
-	public void page() {
-		Main main = new Main();
-		main.setWeekNum(0);
-		main.setStatus(0);
-		System.out.println(main);
-	}
-	
 	
 	public Main m(int user_id) {
 		//当前周数
