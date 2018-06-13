@@ -32,7 +32,7 @@ public interface homePageMapper {
 	public void leaveWeekly(@Param("leave") Leave leave,@Param("date") Date date);
 
 	
-	@Delete("delete from report where user_id = #{userId} and week_num >= #{thisWeek}")
-	public void cancelLeave(@Param("userId") int userId,@Param("thisWeek") int thisWeek);
+	@Delete("delete from report where user_id = #{userId} and group_id = #{groupId} and week_num >= #{weekNum}")
+	public void cancelLeave(@Param("userId") int userId,@Param("groupId") int groupId ,@Param("weekNum") int weekNum);
 	
 }
