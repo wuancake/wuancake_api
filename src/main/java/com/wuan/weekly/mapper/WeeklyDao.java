@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.maggic.Report;
 
 @Mapper
@@ -21,5 +22,8 @@ public interface WeeklyDao {
 
 	@Select("select count(*) from report where user_id = #{userId} and group_id = #{groupId}")
 	public int getCountOfReport(@Param("userId") int userId,@Param("groupId") int groupId);
+
+	@Select("SELECT * FROM user_group WHERE user_id = #{userId} and group_id = #{groupId} ")
+	public User findUserByUserId(@Param("userId")int userId,@Param("groupId") int groupId);
 
 }

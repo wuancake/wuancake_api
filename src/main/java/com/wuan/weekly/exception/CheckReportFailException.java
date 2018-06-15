@@ -1,17 +1,19 @@
 package com.wuan.weekly.exception;
 
-public class CheckReportFailException extends RuntimeException{
+public class CheckReportFailException extends WuanWeeklyException {
 
 	private static final long serialVersionUID = -1885834430508450265L;
 
 	public CheckReportFailException() {
 		super();
-		System.out.println("查看周报失败");
+		// TODO 自动生成的构造函数存根
 	}
 
-	public CheckReportFailException(Exception e) {
-		System.out.println("查看周报失败");
-		e.printStackTrace();	
+	public CheckReportFailException(String errorMessage) {
+		super(errorMessage);
+		// TODO 自动生成的构造函数存根
 	}
+
+	
 
 }

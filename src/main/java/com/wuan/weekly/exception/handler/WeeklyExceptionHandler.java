@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wuan.weekly.entity.maggic.Msg;
+import com.wuan.weekly.exception.CheckReportFailException;
+import com.wuan.weekly.exception.NotLoginException;
+import com.wuan.weekly.exception.NullTextException;
+import com.wuan.weekly.exception.ParamFormatException;
+import com.wuan.weekly.exception.ReportFailException;
 
 /**
  * 对周报发生的异常进行统一处理
@@ -17,10 +22,10 @@ public class WeeklyExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value=com.wuan.weekly.exception.ReportFailException.class)
-	public Msg createSubmitReportFailMsg() {
+	public Msg createSubmitReportFailMsg(ReportFailException e) {
 		Msg msg = new Msg();
 		msg.setInfoCode(500);
-		msg.setInfoText("提交周报失败");
+		msg.setInfoText(e.getErrorMessage());
 		return msg;	
 	}
 
@@ -29,9 +34,9 @@ public class WeeklyExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value=com.wuan.weekly.exception.CheckReportFailException.class)
-	public Msg createCheckReportFailMsg() {
+	public Msg createCheckReportFailMsg(CheckReportFailException e) {
 		Msg msg = new Msg();
-		msg.setInfoText("查看周报失败");
+		msg.setInfoText(e.getErrorMessage());
 		msg.setInfoCode(500);
 		return msg;
 	}
@@ -41,9 +46,9 @@ public class WeeklyExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value=com.wuan.weekly.exception.ParamFormatException.class)
-	public Msg createParamError() {
+	public Msg createParamError(ParamFormatException e) {
 		Msg msg = new Msg();
-		msg.setInfoText("传入参数错误！");
+		msg.setInfoText(e.getErrorMessage());
 		msg.setInfoCode(500);
 		return msg;
 	}
@@ -53,9 +58,9 @@ public class WeeklyExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value=com.wuan.weekly.exception.NullTextException.class)
-	public Msg createNullMsgError() {
+	public Msg createNullMsgError(NullTextException e) {
 		Msg msg = new Msg();
-		msg.setInfoText("必填项不能为空！");
+		msg.setInfoText(e.getErrorMessage());
 		msg.setInfoCode(500);
 		return msg;
 	}
@@ -65,9 +70,9 @@ public class WeeklyExceptionHandler {
 	 */
 	@ResponseBody
 	@ExceptionHandler(value=com.wuan.weekly.exception.NotLoginException.class)
-	public Msg notLoginError() {
+	public Msg notLoginError(NotLoginException e) {
 		Msg msg = new Msg();
-		msg.setInfoText("请先登录！");
+		msg.setInfoText(e.getErrorMessage());
 		msg.setInfoCode(500);
 		return msg;
 	}

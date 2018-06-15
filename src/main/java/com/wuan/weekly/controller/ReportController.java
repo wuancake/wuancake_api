@@ -38,7 +38,7 @@ public class ReportController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-	public Msg reportWeekly(@RequestBody Report reciveReport, HttpServletRequest request) throws ParamFormatException, NullTextException {
+	public Msg reportWeekly(@RequestBody Report reciveReport, HttpServletRequest request) throws ParamFormatException, NullTextException, ReportFailException {
 		//检查用户id和分组id是否合法
 		checkParam("用户ID或分组ID不正确！",reciveReport.getUserId(),reciveReport.getGroupId());
 		//检查必填项是否为空
@@ -58,9 +58,13 @@ public class ReportController {
 		try {
 			//向数据库提交周报
 			weeklyServiceImple.reportWeekly(reciveReport);
+		} catch(ReportFailException e) {
+			e.printStackTrace();
+			throw e;
 		} catch (Exception e) {
 			//提交周报时发生了异常
-			throw new ReportFailException(e);
+			e.printStackTrace();
+			throw new ReportFailException("向数据库提交周报时发生错误");
 		}
 		//正确提交，向前端响应消息
 		Msg msg = new Msg("成功提交周报", 200);
@@ -90,7 +94,7 @@ public class ReportController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/myweekly", method = RequestMethod.POST)
-	public Object getReport(@RequestBody Map<String, Object> page) throws ParamFormatException {
+	public Object getReport(@RequestBody Map<String, Object> page) throws ParamFormatException, CheckReportFailException {
 		//当前第几页（页数从1开始）
 		int pageNum = (int) page.get("pageNum");
 		//每页几份周报
@@ -125,7 +129,7 @@ public class ReportController {
 			reports.setCount(count);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new CheckReportFailException();
+			throw new CheckReportFailException("查看周报失败！");
 		}
 		//找不到周报
 		if (report.isEmpty()) {
@@ -150,5 +154,5 @@ public class ReportController {
 			rep.setUrl(reportTemp[3]);
 		}
 	}
-	
+
 }
