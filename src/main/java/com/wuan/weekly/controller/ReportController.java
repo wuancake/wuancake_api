@@ -141,6 +141,9 @@ public class ReportController {
 
 	//切割周报
 	private void cuttingReport(Report rep) {
+		if(rep.getStatus() == 3) {
+			return;
+		}
 		System.out.println(rep.getText());
 		String reportTemp[] = rep.getText().split("<br>");
 		//本周完成

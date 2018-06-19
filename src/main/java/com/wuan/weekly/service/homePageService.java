@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.wuan.weekly.entity.Leave;
 import com.wuan.weekly.entity.Main;
+import com.wuan.weekly.mapper.WeeklyDao;
 import com.wuan.weekly.mapper.homePageMapper;
 import com.wuan.weekly.util.Utils;
 
@@ -13,7 +14,6 @@ public class homePageService {
 
 	@Autowired
 	private homePageMapper mapper;
-	
 
 	
 	/**

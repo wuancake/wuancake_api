@@ -3,6 +3,8 @@ package com.wuan.weekly.controller;
 import java.util.Date;
 import java.util.Map;
 
+import javax.xml.bind.annotation.W3CDomHandler;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import com.wuan.weekly.entity.Leave;
 import com.wuan.weekly.entity.Main;
 import com.wuan.weekly.exception.NullTextException;
 import com.wuan.weekly.exception.ParamFormatException;
+import com.wuan.weekly.mapper.WeeklyDao;
 import com.wuan.weekly.service.homePageService;
 import com.wuan.weekly.util.Utils;
 
@@ -23,6 +26,7 @@ public class homePageController {
 
 	@Autowired
 	private homePageService hps;
+
 
 	@ResponseBody
 	@RequestMapping(value="/main",method=RequestMethod.POST,produces="application/json;charset=UTF-8")
