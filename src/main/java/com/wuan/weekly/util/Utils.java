@@ -23,4 +23,8 @@ public class Utils {
         FIRSTDAY = d;
     }
 
+    public static Integer getMaxWeekNum() {
+        return (int) ((new Date().getTime() - FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
+    }
+
 }

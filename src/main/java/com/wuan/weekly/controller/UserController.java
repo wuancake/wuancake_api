@@ -6,8 +6,10 @@ import com.wuan.weekly.entity.JsonRequestBody;
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.entity.WaGroup;
 import com.wuan.weekly.mapper.WaGroupMapper;
+import com.wuan.weekly.service.WeeklyService;
 import com.wuan.weekly.service.imple.UserServiceImpl;
 import com.wuan.weekly.util.MD5Utils;
+import com.wuan.weekly.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,9 @@ public class UserController {
     private UserServiceImpl userService;
     @Autowired
     private WaGroupMapper waGroupMapper;
+
+    @Autowired
+    private WeeklyService weeklyService;
 
     @RequestMapping(value = "regist")
     public @ResponseBody
@@ -130,6 +135,14 @@ public class UserController {
                 if (groupId == 0) {
                     jsonBean.setInfoText("登录成功未选择分组");
                 }
+                //微信小程序需要，返回当前周数
+                jsonBean.setCurrWeek(Utils.getMaxWeekNum());
+                //微信小程序需要，返回当前周数的周报状态
+                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNum(userId, Utils.getMaxWeekNum());
+                if (statusByUserIdAndMaxWeekNum == null) {
+                    statusByUserIdAndMaxWeekNum = 1;
+                }
+                jsonBean.setStatus(statusByUserIdAndMaxWeekNum);
                 jsonBean.setGroupName(waGroupMapper.getGroupNameByGroupId(groupId));
                 jsonBean.setInfoCode("200");
                 return jsonBean;

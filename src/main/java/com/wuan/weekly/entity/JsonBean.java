@@ -9,12 +9,38 @@ import java.util.List;
  */
 public class JsonBean {
 
+    //响应内容
     private String infoText;
+    //响应码
     private String infoCode;
+    //用户id
     private Integer userId;
+    //分组id
     private Integer groupId;
+    //用户名
     private String userName;
+    //分组名
     private String groupName;
+    //当前周数（微信小程序登录后用）
+    private Integer currWeek;
+    //周报状态（微信小程序登录后用）
+    private Integer status;
+
+    public Integer getCurrWeek() {
+        return currWeek;
+    }
+
+    public void setCurrWeek(Integer currWeek) {
+        this.currWeek = currWeek;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public String getGroupName() {
         return groupName;
