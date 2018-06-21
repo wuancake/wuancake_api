@@ -3,10 +3,6 @@ package com.wuan.weekly.controller;
 import java.util.Date;
 import java.util.Map;
 
-import javax.xml.bind.annotation.W3CDomHandler;
-
-import com.wuan.weekly.entity.Version;
-import com.wuan.weekly.mapper.VersionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +27,7 @@ public class homePageController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/main", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/main", method = RequestMethod.POST)
     public Main home(@RequestBody Map<String, Object> map) throws ParamFormatException {
         int userId = (int) map.get("userId");
         if (userId < 0) {
@@ -42,7 +38,7 @@ public class homePageController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/leave", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/leave", method = RequestMethod.POST)
     public Info leave(@RequestBody Leave li) throws ParamFormatException, NullTextException {
         //请了多少周假
         int weekNum = li.getWeekNum();
@@ -52,7 +48,7 @@ public class homePageController {
         int userId = li.getUserId();
         //分组id
         int groupId = li.getGroupId();
-        if (weekNum < 0 || userId < 0 || groupId < 0) {
+        if (weekNum <= 0 || userId < 0 || groupId < 0) {
             throw new ParamFormatException("用户ID或分组ID不正确或请假周数不正确！");
         }
         if (reason == null || "".equals(reason)) {
@@ -76,7 +72,7 @@ public class homePageController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/cancelLeave", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/cancelLeave", method = RequestMethod.POST)
     public Info cancelLeave(@RequestBody Map<String, Object> param) throws ParamFormatException {
         int userId = (int) param.get("userId");
         int groupId = (int) param.get("groupId");
