@@ -31,9 +31,9 @@ public class OriginFilter implements Filter {
 //    	res.setCharacterEncoding("utf-8");
         HttpServletResponse response = (HttpServletResponse) res;
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "application/json");
+        response.setHeader("Access-Control-Allow-Headers", "content-type");
         chain.doFilter(req, res);
     }
 
