@@ -1,6 +1,7 @@
 package com.wuan.weekly.controller;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,6 @@ public class homePageController {
         if (reason == null || "".equals(reason)) {
             throw new NullTextException("必填项不能为空！");
         }
-        System.out.println(reason);
         //生成请假周报
         Leave[] leaveReport = createLeaveReport(weekNum, reason, userId, groupId);
         try {
@@ -63,7 +63,8 @@ public class homePageController {
             //如果在往数据库里更新请假出现问题，事务回滚
             //当前周数
             e.printStackTrace();
-            int thisWeek = (int) ((new Date().getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
+            //当前周数
+            int thisWeek = (int) (((Calendar.getInstance(Locale.CHINA).getTime()).getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
             hps.cancelLeave(userId, groupId, thisWeek);
             return new Info("请假失败", 500);
         }
@@ -78,7 +79,7 @@ public class homePageController {
         int groupId = (int) param.get("groupId");
         checkParam(userId, groupId);
         //当前周数
-        int thisWeek = (int) ((new Date().getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
+        int thisWeek = (int) (((Calendar.getInstance(Locale.CHINA).getTime()).getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
         try {
             hps.cancelLeave(userId, groupId, thisWeek);
         } catch (Exception e) {
@@ -103,7 +104,7 @@ public class homePageController {
         //周报状态  3为请假
         int status = 3;
         //当前周数
-        int thisWeek = (int) ((new Date().getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
+        int thisWeek = (int) (((Calendar.getInstance(Locale.CHINA).getTime()).getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
         for (int i = 0; i < weekNum; i++) {
             leaveReport[i] = new Leave(thisWeek, userId, groupId, status, reason);
             thisWeek++;

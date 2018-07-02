@@ -1,7 +1,9 @@
 package com.wuan.weekly.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -44,10 +46,10 @@ public class ReportController {
 		//检查必填项是否为空
 		checkContent(reciveReport.getComplete(),reciveReport.getTrouble(),reciveReport.getPlane());
 		//生成提交周报时间
-		Date dt = new Date();
+		Calendar calendar = Calendar.getInstance(Locale.CHINA);
+		Date dt = calendar.getTime();
 		//根据字段生成周报内容
 		String text = reciveReport.getComplete() + SPLIT + reciveReport.getTrouble() + SPLIT + reciveReport.getPlane() + SPLIT + reciveReport.getUrl() + SPLIT;
-		System.out.println(text);
 		//周数算出来 提交时间-第一周的时间/一周的时间
 		int weekNum = (int) ((dt.getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
 		//向周报设置其他信息
@@ -118,6 +120,7 @@ public class ReportController {
 				weekNum += index;
 			}
 			report = weeklyServiceImple.getReportByWeekNum(userId, groupId, limit, weekNum);
+			System.out.println(report);
 			//按周数降序排列
 			Set<Report> set = new TreeSet<>();
 			for (Report rep : report) {

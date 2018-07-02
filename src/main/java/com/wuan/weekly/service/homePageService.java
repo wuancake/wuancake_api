@@ -1,6 +1,8 @@
 package com.wuan.weekly.service;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import com.wuan.weekly.entity.Version;
 import com.wuan.weekly.mapper.VersionMapper;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.wuan.weekly.entity.Leave;
 import com.wuan.weekly.entity.Main;
-import com.wuan.weekly.mapper.WeeklyDao;
 import com.wuan.weekly.mapper.homePageMapper;
 import com.wuan.weekly.util.Utils;
 
@@ -41,8 +42,8 @@ public class homePageService {
     }
 
     public Main m(int user_id) {
-        //当前周数
-        int thisWeek = (int) ((new Date().getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
+    	 //当前周数
+        int thisWeek = (int) (((Calendar.getInstance(Locale.CHINA).getTime()).getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
         int status = 0;
         try {
             status = mapper.selectStatus(user_id, thisWeek);
