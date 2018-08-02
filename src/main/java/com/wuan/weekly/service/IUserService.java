@@ -22,4 +22,7 @@ public interface IUserService {
     List<WaGroup> findAllGroupInfo();
 
     User findUserByEmail(String email);
+
+    int updatePasswordById(Integer userId, String password);
+
 }
