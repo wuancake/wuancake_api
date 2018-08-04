@@ -10,6 +10,7 @@ import com.wuan.weekly.service.WeeklyService;
 import com.wuan.weekly.service.imple.UserServiceImpl;
 import com.wuan.weekly.util.MD5Utils;
 import com.wuan.weekly.util.Utils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -213,6 +214,37 @@ public class UserController {
             return jsonBean;
         }
 
+        jsonBean.setInfoCode("200");
+        return jsonBean;
+    }
+
+    @RequestMapping(value = "updateUserName")
+    public @ResponseBody
+    JsonBean updateUserName(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) {
+
+        JsonBean jsonBean = new JsonBean();
+
+        try {
+
+            String userName = userService.findUserNameByUserName(user.getUserName());
+
+            if (StringUtils.isNotBlank(userName) && StringUtils.isNotEmpty(userName)) {
+
+                jsonBean.setInfoText("抱歉，此昵称已被使用！");
+                jsonBean.setInfoCode("500");
+                return jsonBean;
+            } else {
+                userService.updateUserNameById(user.getUserName(), user.getId());
+                jsonBean.setUserName(user.getUserName());
+            }
+
+        } catch (Exception e) {
+            jsonBean.setInfoText("抱歉，修改失败！请稍后再试");
+            jsonBean.setInfoCode("500");
+            return jsonBean;
+        }
+
+        jsonBean.setInfoText("修改成功");
         jsonBean.setInfoCode("200");
         return jsonBean;
     }

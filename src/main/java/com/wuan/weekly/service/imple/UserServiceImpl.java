@@ -52,6 +52,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public String findUserNameByUserName(String userName) {
+        return userMapper.findUserNameByUserName(userName);
+    }
+
+    @Override
+    public void updateUserNameById(String userName, Integer userId) {
+        userMapper.updateUserNameById(userName,userId);
+    }
+
+    @Override
     public void saveUser(User user) throws Exception {
         /*
         增强接口健壮性

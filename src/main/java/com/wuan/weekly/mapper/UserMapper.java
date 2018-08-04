@@ -29,6 +29,12 @@ public interface UserMapper {
     @Select("select * from user where email = #{email}")
     User findUserByEmail(@Param("email") String email);
 
-    @Update("update user set password=#{password} where id = #{userId}")
+    @Update("UPDATE user SET password=#{password} WHERE id = #{userId}")
     int updatePasswordById(@Param("userId") Integer userId, @Param("password") String password);
+
+    @Select("SELECT user_name FROM user WHERE user_name = #{userName}")
+    String findUserNameByUserName(@Param("userName") String userName);
+
+    @Update("UPDATE user SET user_name=#{userName} WHERE id = #{userId}")
+    void updateUserNameById(@Param("userName") String userName, @Param("userId") Integer userId);
 }
