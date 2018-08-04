@@ -10,6 +10,7 @@ import com.wuan.weekly.service.WeeklyService;
 import com.wuan.weekly.service.imple.UserServiceImpl;
 import com.wuan.weekly.util.MD5Utils;
 import com.wuan.weekly.util.Utils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,10 @@ import java.util.List;
 @RestController
 public class UserController {
     public static final String SESSION_NAME = "9527";
+
     @Autowired
     private UserServiceImpl userService;
+
     @Autowired
     private WaGroupMapper waGroupMapper;
 
@@ -168,4 +171,82 @@ public class UserController {
         jsonBean.setInfoCode("200");
         return jsonBean;
     }
+
+    @RequestMapping(value = "updatePassword")
+    public @ResponseBody
+    JsonBean updatePassword(@RequestBody JsonRequestBody jsonRequestBody, HttpServletRequest request, HttpServletResponse response) {
+
+        String oldPasswd = jsonRequestBody.getPassword();
+        String newPasswd = jsonRequestBody.getNewPassword();
+        String confirmPasswd = jsonRequestBody.getConfirmPasswd();
+
+        JsonBean jsonBean = new JsonBean();
+
+        try {
+            User user = userService.findUserByUserId(jsonRequestBody.getUserId());
+            String password = MD5Utils.generate(user.getPassword());
+            boolean verify = MD5Utils.verify(oldPasswd, password);
+
+            if (!verify) {
+                jsonBean.setInfoText("旧密码输入错误");
+                jsonBean.setInfoCode("500");
+                return jsonBean;
+            } else {
+                // 判断输入的两个新密码是否一致
+                if (newPasswd.equals(confirmPasswd)) {
+                    // 如果新密码与原密码不同，执行更新密码操作
+                    if (!newPasswd.equals(user.getPassword())) {
+                        userService.updatePasswordById(jsonRequestBody.getUserId(), MD5Utils.generate(newPasswd));
+                    } else if (MD5Utils.generate(newPasswd).equals(password)) {
+                        jsonBean.setInfoText("密码没有改动");
+                        jsonBean.setInfoCode("500");
+                        return jsonBean;
+                    }
+                } else {
+                    jsonBean.setInfoText("抱歉，密码输入不一致");
+                    jsonBean.setInfoCode("500");
+                    return jsonBean;
+                }
+            }
+        } catch (Exception e) {
+            jsonBean.setInfoText("抱歉，修改失败！请稍后再试");
+            jsonBean.setInfoCode("500");
+            return jsonBean;
+        }
+
+        jsonBean.setInfoCode("200");
+        return jsonBean;
+    }
+
+    @RequestMapping(value = "updateUserName")
+    public @ResponseBody
+    JsonBean updateUserName(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) {
+
+        JsonBean jsonBean = new JsonBean();
+
+        try {
+
+            String userName = userService.findUserNameByUserName(user.getUserName());
+
+            if (StringUtils.isNotBlank(userName) && StringUtils.isNotEmpty(userName)) {
+
+                jsonBean.setInfoText("抱歉，此昵称已被使用！");
+                jsonBean.setInfoCode("500");
+                return jsonBean;
+            } else {
+                userService.updateUserNameById(user.getUserName(), user.getId());
+                jsonBean.setUserName(user.getUserName());
+            }
+
+        } catch (Exception e) {
+            jsonBean.setInfoText("抱歉，修改失败！请稍后再试");
+            jsonBean.setInfoCode("500");
+            return jsonBean;
+        }
+
+        jsonBean.setInfoText("修改成功");
+        jsonBean.setInfoCode("200");
+        return jsonBean;
+    }
+
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * Time: 22:47
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements IUserService {
     private static final String BLANK = " ";
     private static final String EMAIL_CHECK = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$";
@@ -44,6 +44,21 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User findUserByEmail(String email) {
         return userMapper.findUserByEmail(email);
+    }
+
+    @Override
+    public int updatePasswordById(Integer userId, String password) {
+        return userMapper.updatePasswordById(userId, password);
+    }
+
+    @Override
+    public String findUserNameByUserName(String userName) {
+        return userMapper.findUserNameByUserName(userName);
+    }
+
+    @Override
+    public void updateUserNameById(String userName, Integer userId) {
+        userMapper.updateUserNameById(userName,userId);
     }
 
     @Override
@@ -102,7 +117,6 @@ public class UserServiceImpl implements IUserService {
         //对应的attend表
         //attendMapper.forUserAndGroup(userGroup.getUserId(), userGroup.getGroupId(), 2);
     }
-
 
     @Override
     public User findUserByUserId(Integer userId) {
