@@ -29,4 +29,7 @@ public interface IUserService {
 
     void updateUserNameById(String userName, Integer userId);
 
+    void quitgroupById(Integer userId);
+
+
 }

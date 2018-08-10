@@ -248,5 +248,33 @@ public class UserController {
         jsonBean.setInfoCode("200");
         return jsonBean;
     }
+    @RequestMapping(value = "exit/group")
+    public @ResponseBody
+    JsonBean quitgroup(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) {
+
+        JsonBean jsonBean = new JsonBean();
+
+        try {
+            if(userService.findUserGroupByUserId(user.getId()).equals(0))
+            {
+                jsonBean.setInfoText("您还未选择分组，不能执行此操作");
+                jsonBean.setInfoCode("500");
+                return jsonBean;
+            }
+          userService.quitgroupById( user.getId());
+            jsonBean.setGroupId(
+                    userService.findUserGroupByUserId(user.getId())
+            );
+        } catch (Exception e) {
+            jsonBean.setInfoText("抱歉，退出分组失败");
+            jsonBean.setInfoCode("500");
+            return jsonBean;
+        }
+
+        jsonBean.setInfoText("退出分组成功");
+        jsonBean.setInfoCode("200");
+
+        return jsonBean;
+    }
 
 }
