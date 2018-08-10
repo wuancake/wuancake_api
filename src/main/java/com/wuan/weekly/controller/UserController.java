@@ -248,7 +248,7 @@ public class UserController {
         jsonBean.setInfoCode("200");
         return jsonBean;
     }
-    @RequestMapping(value = "exit/group")
+    @RequestMapping(value = "quitGroup")
     public @ResponseBody
     JsonBean quitgroup(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) {
 
