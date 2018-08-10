@@ -20,4 +20,8 @@ public interface UserGroupMapper {
     @Update("update user_group set group_id = #{groupId} where user_id = #{userId}")
     void updateGroup(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
 
+    //退出分组
+    @Update("UPDATE user_group SET group_id=0 WHERE id = #{userId}")
+    void quitgroupById( @Param("userId") Integer userId);
+
 }

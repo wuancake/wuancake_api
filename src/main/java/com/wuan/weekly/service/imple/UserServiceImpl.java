@@ -62,6 +62,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public void quitgroupById( Integer userId){
+        userGroupMapper.quitgroupById(userId);
+    }
+
+
+    @Override
     public void saveUser(User user) throws Exception {
         /*
         增强接口健壮性
