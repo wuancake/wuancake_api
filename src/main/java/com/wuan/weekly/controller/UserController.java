@@ -179,13 +179,14 @@ public class UserController {
         String oldPasswd = jsonRequestBody.getPassword();
         String newPasswd = jsonRequestBody.getNewPassword();
         String confirmPasswd = jsonRequestBody.getConfirmPasswd();
+        String newPasswdMD5 = MD5Utils.generate(newPasswd);
 
         JsonBean jsonBean = new JsonBean();
 
         try {
             User user = userService.findUserByUserId(jsonRequestBody.getUserId());
-            String password = MD5Utils.generate(user.getPassword());
-            boolean verify = MD5Utils.verify(oldPasswd, password);
+
+            boolean verify = MD5Utils.verify(oldPasswd, user.getPassword());
 
             if (!verify) {
                 jsonBean.setInfoText("旧密码输入错误");
@@ -195,9 +196,9 @@ public class UserController {
                 // 判断输入的两个新密码是否一致
                 if (newPasswd.equals(confirmPasswd)) {
                     // 如果新密码与原密码不同，执行更新密码操作
-                    if (!newPasswd.equals(user.getPassword())) {
-                        userService.updatePasswordById(jsonRequestBody.getUserId(), MD5Utils.generate(newPasswd));
-                    } else if (MD5Utils.generate(newPasswd).equals(password)) {
+                    if (!newPasswdMD5.equals(user.getPassword())) {
+                        userService.updatePasswordById(jsonRequestBody.getUserId(), newPasswdMD5);
+                    } else if (newPasswdMD5.equals(user.getPassword())) {
                         jsonBean.setInfoText("密码没有改动");
                         jsonBean.setInfoCode("500");
                         return jsonBean;
@@ -215,6 +216,7 @@ public class UserController {
         }
 
         jsonBean.setInfoCode("200");
+        jsonBean.setInfoText("密码修改成功");
         return jsonBean;
     }
 
@@ -225,11 +227,9 @@ public class UserController {
         JsonBean jsonBean = new JsonBean();
 
         try {
-
             String userName = userService.findUserNameByUserName(user.getUserName());
 
             if (StringUtils.isNotBlank(userName) && StringUtils.isNotEmpty(userName)) {
-
                 jsonBean.setInfoText("抱歉，此昵称已被使用！");
                 jsonBean.setInfoCode("500");
                 return jsonBean;
