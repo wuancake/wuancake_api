@@ -141,11 +141,11 @@ public class UserController {
                 //微信小程序需要，返回当前周数
                 jsonBean.setCurrWeek(Utils.getMaxWeekNum());
                 //微信小程序需要，返回当前周数的周报状态
-                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, Utils.getMaxWeekNum(),groupId);
-                if (statusByUserIdAndMaxWeekNum == null) {
-                    statusByUserIdAndMaxWeekNum = 1;
-                }
-                jsonBean.setStatus(statusByUserIdAndMaxWeekNum);
+//                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, Utils.getMaxWeekNum(),groupId);
+//                if (statusByUserIdAndMaxWeekNum == null) {
+//                    statusByUserIdAndMaxWeekNum = 1;
+//                }
+                //jsonBean.setStatus(statusByUserIdAndMaxWeekNum);
                 jsonBean.setGroupName(waGroupMapper.getGroupNameByGroupId(groupId));
                 jsonBean.setInfoCode("200");
                 return jsonBean;
@@ -253,6 +253,7 @@ public class UserController {
      * 2018-9-22 17:54:52
      * modifier:ericheel
      * 退出分组后将那周的状态清空
+     *
      * @param user
      * @param response
      * @param request
@@ -265,13 +266,12 @@ public class UserController {
         JsonBean jsonBean = new JsonBean();
 
         try {
-            if(userService.findUserGroupByUserId(user.getId()).equals(0))
-            {
+            if (userService.findUserGroupByUserId(user.getId()).equals(0)) {
                 jsonBean.setInfoText("您还未选择分组，不能执行此操作");
                 jsonBean.setInfoCode("500");
                 return jsonBean;
             }
-          userService.quitgroupById( user.getId());
+            userService.quitgroupById(user.getId());
             jsonBean.setGroupId(
                     userService.findUserGroupByUserId(user.getId())
             );
