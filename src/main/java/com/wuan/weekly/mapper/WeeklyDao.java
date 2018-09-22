@@ -30,7 +30,8 @@ public interface WeeklyDao {
     @Select("select distinct status " +
             "from report " +
             "where user_id = #{userId} " +
-            "and week_num = #{weekNum} ")
-    public Integer findStatusByUserIdAndMaxWeekNum(@Param("userId") Integer userId, @Param("weekNum") Integer weekNum);
+            "and week_num = #{weekNum} " +
+            "and group_id = #{groupId}")
+    public Integer findStatusByUserIdAndMaxWeekNumAndGroupId(@Param("userId") Integer userId, @Param("weekNum") Integer weekNum,@Param("groupId") Integer groupId);
 }
 

@@ -141,7 +141,7 @@ public class UserController {
                 //微信小程序需要，返回当前周数
                 jsonBean.setCurrWeek(Utils.getMaxWeekNum());
                 //微信小程序需要，返回当前周数的周报状态
-                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNum(userId, Utils.getMaxWeekNum());
+                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, Utils.getMaxWeekNum(),groupId);
                 if (statusByUserIdAndMaxWeekNum == null) {
                     statusByUserIdAndMaxWeekNum = 1;
                 }
@@ -248,6 +248,16 @@ public class UserController {
         jsonBean.setInfoCode("200");
         return jsonBean;
     }
+
+    /**
+     * 2018-9-22 17:54:52
+     * modifier:ericheel
+     * 退出分组后将那周的状态清空
+     * @param user
+     * @param response
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "quitGroup")
     public @ResponseBody
     JsonBean quitgroup(@RequestBody User user, HttpServletResponse response, HttpServletRequest request) {

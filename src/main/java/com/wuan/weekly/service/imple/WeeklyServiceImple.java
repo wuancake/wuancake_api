@@ -2,6 +2,7 @@ package com.wuan.weekly.service.imple;
 
 import java.util.List;
 
+import com.wuan.weekly.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,10 @@ public class WeeklyServiceImple implements WeeklyService {
         weeklyDao.reportWeekly(saveReport);
     }
 
+
     @Override
-    public Integer findStatusByUserIdAndMaxWeekNum(Integer userId, Integer maxWeekNum) {
-        return weeklyDao.findStatusByUserIdAndMaxWeekNum(userId, maxWeekNum);
+    public Integer findStatusByUserIdAndMaxWeekNumAndGroupId(Integer userId, Integer maxWeekNum,Integer groupId) {
+        return weeklyDao.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, maxWeekNum,groupId);
     }
 
     @Override

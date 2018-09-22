@@ -38,4 +38,5 @@ public interface UserMapper {
     @Update("UPDATE user SET user_name=#{userName} WHERE id = #{userId}")
     void updateUserNameById(@Param("userName") String userName, @Param("userId") Integer userId);
 
+
 }

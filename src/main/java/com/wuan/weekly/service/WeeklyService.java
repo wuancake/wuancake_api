@@ -12,5 +12,5 @@ public interface WeeklyService {
 	void reportWeekly(Report saveReport) throws ReportFailException;
 
 
-    Integer findStatusByUserIdAndMaxWeekNum(Integer userId, Integer maxWeekNum);
+    Integer findStatusByUserIdAndMaxWeekNumAndGroupId(Integer userId, Integer maxWeekNum,Integer groupId);
 }
