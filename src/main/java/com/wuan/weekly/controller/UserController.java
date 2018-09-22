@@ -145,6 +145,7 @@ public class UserController {
                 if (statusByUserIdAndMaxWeekNum == null) {
                     statusByUserIdAndMaxWeekNum = 1;
                 }
+                System.out.println("fuck--status=="+ statusByUserIdAndMaxWeekNum);
                 jsonBean.setStatus(statusByUserIdAndMaxWeekNum);
                 jsonBean.setGroupName(waGroupMapper.getGroupNameByGroupId(groupId));
                 jsonBean.setInfoCode("200");

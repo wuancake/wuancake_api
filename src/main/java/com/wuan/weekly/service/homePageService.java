@@ -55,6 +55,7 @@ public class homePageService {
             status = 1;
         }
 
+        System.out.println("fuck--status=="+ status);
         Main ma = new Main();
         ma.setWeekNum(maxWeekNum);
         ma.setStatus(status);
