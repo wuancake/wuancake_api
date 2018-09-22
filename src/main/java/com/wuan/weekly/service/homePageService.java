@@ -56,26 +56,20 @@ public class homePageService {
         }
 
         Main ma = new Main();
-        if (status == 1) {
-            ma.setWeekNum(maxWeekNum);
-            ma.setStatus(status);
-            ma.setInfoText("未提交");
-            ma.setInfoCode(200);
-        } else {
-            if (status == 2) {
-                ma.setWeekNum(maxWeekNum);
-                ma.setStatus(status);
+        ma.setWeekNum(maxWeekNum);
+        ma.setStatus(status);
+        ma.setInfoCode(200);
+        switch (status) {
+            case 1:
+                ma.setInfoText("未提交");
+                break;
+            case 2:
                 ma.setInfoText("已提交");
-                ma.setInfoCode(200);
-            } else if (status == 0) {
-                ma.setInfoCode(500);
-                ma.setInfoText("服务器错误");
-            } else {
-                ma.setWeekNum(maxWeekNum);
-                ma.setStatus(status);
+                break;
+            case 3:
                 ma.setInfoText("已请假");
-                ma.setInfoCode(200);
-            }
+                break;
+            default:
         }
         Version lateVersion = versionMapper.getLateVersion();
         ma.setVersion(lateVersion);

@@ -141,7 +141,7 @@ public class UserController {
                 //微信小程序需要，返回当前周数
                 jsonBean.setCurrWeek(Utils.getMaxWeekNum());
                 //微信小程序需要，返回当前周数的周报状态
-                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, Utils.getMaxWeekNum(),groupId);
+                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, Utils.getMaxWeekNum(), groupId);
                 if (statusByUserIdAndMaxWeekNum == null) {
                     statusByUserIdAndMaxWeekNum = 1;
                 }
