@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Map;
 
+import com.wuan.weekly.service.IUserService;
+import com.wuan.weekly.service.WeeklyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +27,22 @@ public class homePageController {
     @Autowired
     private homePageService hps;
 
-
+    @Autowired
+    private IUserService iUserService;
 
     @ResponseBody
     @RequestMapping(value = "/main", method = RequestMethod.POST)
     public Main home(@RequestBody Map<String, Object> map) throws ParamFormatException {
         int userId = (int) map.get("userId");
+
+        Integer userGroupByUserId = iUserService.findUserGroupByUserId(userId);
+
+
         if (userId < 0) {
             throw new ParamFormatException("用户ID不正确！");
         }
 
-        return hps.m(userId);
+        return hps.m(userId,userGroupByUserId);
     }
 
     @ResponseBody

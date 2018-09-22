@@ -141,11 +141,11 @@ public class UserController {
                 //微信小程序需要，返回当前周数
                 jsonBean.setCurrWeek(Utils.getMaxWeekNum());
                 //微信小程序需要，返回当前周数的周报状态
-//                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, Utils.getMaxWeekNum(),groupId);
-//                if (statusByUserIdAndMaxWeekNum == null) {
-//                    statusByUserIdAndMaxWeekNum = 1;
-//                }
-                //jsonBean.setStatus(statusByUserIdAndMaxWeekNum);
+                Integer statusByUserIdAndMaxWeekNum = weeklyService.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, Utils.getMaxWeekNum(),groupId);
+                if (statusByUserIdAndMaxWeekNum == null) {
+                    statusByUserIdAndMaxWeekNum = 1;
+                }
+                jsonBean.setStatus(statusByUserIdAndMaxWeekNum);
                 jsonBean.setGroupName(waGroupMapper.getGroupNameByGroupId(groupId));
                 jsonBean.setInfoCode("200");
                 return jsonBean;
