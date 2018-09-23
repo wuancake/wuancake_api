@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import com.wuan.weekly.service.IUserService;
-import com.wuan.weekly.service.WeeklyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,22 +26,21 @@ public class homePageController {
     @Autowired
     private homePageService hps;
 
-    @Autowired
+    @SuppressWarnings("unused")
+	@Autowired
     private IUserService iUserService;
 
+   
     @ResponseBody
     @RequestMapping(value = "/main", method = RequestMethod.POST)
     public Main home(@RequestBody Map<String, Object> map) throws ParamFormatException {
         int userId = (int) map.get("userId");
-
-        Integer userGroupByUserId = iUserService.findUserGroupByUserId(userId);
-
-
+        //Integer userGroupByUserId = iUserService.findUserGroupByUserId(userId);
         if (userId < 0) {
             throw new ParamFormatException("用户ID不正确！");
         }
-
-        return hps.m(userId,userGroupByUserId);
+        //return hps.m(userId,userGroupByUserId);
+        return hps.m(userId);
     }
 
     @ResponseBody
@@ -72,7 +70,7 @@ public class homePageController {
             e.printStackTrace();
             //当前周数
             int thisWeek = (int) (((Calendar.getInstance(Locale.CHINA).getTime()).getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
-            hps.cancelLeave(userId, groupId, thisWeek);
+            hps.cancelLeave(userId, thisWeek);
             return new Info("请假失败", 500);
         }
         //成功请假
@@ -83,12 +81,14 @@ public class homePageController {
     @RequestMapping(value = "/cancelLeave", method = RequestMethod.POST)
     public Info cancelLeave(@RequestBody Map<String, Object> param) throws ParamFormatException {
         int userId = (int) param.get("userId");
-        int groupId = (int) param.get("groupId");
-        checkParam(userId, groupId);
+        //int groupId = (int) param.get("groupId");
+        //checkParam(userId, groupId);
+        checkParam(userId);
         //当前周数
         int thisWeek = (int) (((Calendar.getInstance(Locale.CHINA).getTime()).getTime() - Utils.FIRSTDAY.getTime()) / (7 * 24 * 60 * 60 * 1000));
         try {
-            hps.cancelLeave(userId, groupId, thisWeek);
+            //hps.cancelLeave(userId, groupId, thisWeek);
+            hps.cancelLeave(userId, thisWeek);
         } catch (Exception e) {
             e.printStackTrace();
             return new Info("取消请假失败", 500);

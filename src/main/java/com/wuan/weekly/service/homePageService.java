@@ -41,10 +41,14 @@ public class homePageService {
      * @param userId
      * @param thisWeek
      */
-    public void cancelLeave(int userId, int groupId, int thisWeek) {
-        mapper.cancelLeave(userId, groupId, thisWeek);
-    }
+    //public void cancelLeave(int userId, int groupId, int thisWeek) {
+      //  mapper.cancelLeave(userId, groupId, thisWeek);
+    //}
 
+    public void cancelLeave(int userId, int thisWeek) {
+        mapper.cancelLeave(userId, thisWeek);
+    }
+    
     public Main m(int user_id, int groupId) {
         //当前周数
         Integer maxWeekNum = Utils.getMaxWeekNum();
@@ -76,4 +80,36 @@ public class homePageService {
         ma.setVersion(lateVersion);
         return ma;
     }
+
+	public Main m(int userId) {
+		//当前周数
+        Integer maxWeekNum = Utils.getMaxWeekNum();
+
+        Integer status = weeklyDao.findStatusByUserIdAndMaxWeekNum(userId, maxWeekNum);
+
+        if (null == status) {
+            status = 1;
+        }
+
+        System.out.println("fuck- homePage-status=="+ status);
+        Main ma = new Main();
+        ma.setWeekNum(maxWeekNum);
+        ma.setStatus(status);
+        ma.setInfoCode(200);
+        switch (status) {
+            case 1:
+                ma.setInfoText("未提交");
+                break;
+            case 2:
+                ma.setInfoText("已提交");
+                break;
+            case 3:
+                ma.setInfoText("已请假");
+                break;
+            default:
+        }
+        Version lateVersion = versionMapper.getLateVersion();
+        ma.setVersion(lateVersion);
+        return ma;
+	}
 }

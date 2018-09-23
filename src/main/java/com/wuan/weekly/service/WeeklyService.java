@@ -7,10 +7,14 @@ import com.wuan.weekly.exception.ReportFailException;
 
 public interface WeeklyService {
 
-	List<Report> getReportByWeekNum(int weekNum, int userId, int i, int weekNum2);
-
+	//List<Report> getReportByWeekNum(int weekNum, int userId, int i, int weekNum2);
+       
+	List<Report> getReportByWeekNum(int userId, int startReport, int reportNum);
+	
 	void reportWeekly(Report saveReport) throws ReportFailException;
 
 
     Integer findStatusByUserIdAndMaxWeekNumAndGroupId(Integer userId, Integer maxWeekNum,Integer groupId);
+
+	
 }

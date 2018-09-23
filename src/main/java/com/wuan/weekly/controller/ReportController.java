@@ -104,14 +104,16 @@ public class ReportController {
 		//用户id
 		int userId = (int) page.get("userId");
 		//分组id
-		int groupId = (int) page.get("groupId");
+		//int groupId = (int) page.get("groupId");
 		//验证请求参数是否合法
-		checkParam("用户ID或分组ID不正确或请求页数不正确或周报份数不正确！",pageNum,weekNum,userId,groupId);
+		//checkParam("用户ID或分组ID不正确或请求页数不正确或周报份数不正确！",pageNum,weekNum,userId,groupId);
+		checkParam("用户ID或分组ID不正确或请求页数不正确或周报份数不正确！",pageNum,weekNum,userId);
 		List<Report> report = null;
 		Reports reports = new Reports();
 		try {
 			//用户总共有多少周周报
-			int count = weeklyServiceImple.getCountOfReport(userId, groupId);
+			//int count = weeklyServiceImple.getCountOfReport(userId, groupId);
+			int count = weeklyServiceImple.getCountOfReport(userId);
 			//正数第k周,例：总共100周周报（1-100），一周10页，第9页第一条就是正数第11周
 			int index = count - (pageNum * weekNum);
 			int limit = index;
@@ -119,7 +121,8 @@ public class ReportController {
 				limit = 0;
 				weekNum += index;
 			}
-			report = weeklyServiceImple.getReportByWeekNum(userId, groupId, limit, weekNum);
+			//report = weeklyServiceImple.getReportByWeekNum(userId, groupId, limit, weekNum);
+			report = weeklyServiceImple.getReportByWeekNum(userId,limit, weekNum);
 			System.out.println(report);
 			//按周数降序排列
 			Set<Report> set = new TreeSet<>();

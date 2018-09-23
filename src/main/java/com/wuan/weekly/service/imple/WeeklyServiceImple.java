@@ -35,15 +35,29 @@ public class WeeklyServiceImple implements WeeklyService {
         return weeklyDao.findStatusByUserIdAndMaxWeekNumAndGroupId(userId, maxWeekNum,groupId);
     }
 
-    @Override
+    /*//@Override
     public List<Report> getReportByWeekNum(int userId, int groupId, int startReport, int reportNum) {
         // TODO 自动生成的方法存根
         List<Report> report = weeklyDao.getReportByWeekNum(userId, groupId, startReport, reportNum);
         return report;
+    }*/
+
+    @Override
+    public List<Report> getReportByWeekNum(int userId, int startReport, int reportNum) {
+        // TODO 自动生成的方法存根
+        List<Report> report = weeklyDao.getReportByWeekNum(userId,  startReport, reportNum);
+        return report;
     }
 
-    public int getCountOfReport(int userId, int groupId) {
+    
+    /*public int getCountOfReport(int userId, int groupId) {
         return weeklyDao.getCountOfReport(userId, groupId);
+    }*/
+
+    public int getCountOfReport(int userId) {
+        return weeklyDao.getCountOfReport(userId);
     }
 
+
+	
 }
