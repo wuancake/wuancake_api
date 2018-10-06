@@ -1,5 +1,6 @@
 package com.wuan.weekly.mapper;
 
+import com.wuan.weekly.entity.UserGroup;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
@@ -16,6 +17,9 @@ public interface UserGroupMapper {
 
     @Select("SELECT group_id from user_group WHERE user_id = #{userId} limit 1")
     Integer findUserGroupByUserId(@Param("userId") Integer userId);
+
+    @Select("SELECT * FROM user_group WHERE user_id = #{userId}")
+    UserGroup findAllUserGroupByUserId(@Param("userId") Integer userId);
 
     @Update("update user_group set group_id = #{groupId} where user_id = #{userId}")
     void updateGroup(@Param("userId") Integer userId, @Param("groupId") Integer groupId);
