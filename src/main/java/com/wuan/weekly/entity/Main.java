@@ -5,7 +5,14 @@ public class Main extends Info {
     public int weekNum;
     public int status;
 
-    private Version version;
+    public Main(int weekNum, int status, Version version) {
+		super();
+		this.weekNum = weekNum;
+		this.status = status;
+		this.version = version;
+	}
+
+	private Version version;
 
     public Version getVersion() {
         return version;

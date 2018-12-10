@@ -23,6 +23,8 @@ public class Report implements Comparable<Report> {
 	private Date replyTime;
 	//周报星期数
 	private int weekNum;
+	
+	
 	public int getUserId() {
 		return userId;
 	}
