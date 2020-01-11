@@ -8,7 +8,7 @@ public interface VersionMapper {
     /**
      * 查找最新的app版本和下载路径
      *
-     * @return
+     * @return 版本信息
      */
     @Select("select v,url " +
             "from version " +

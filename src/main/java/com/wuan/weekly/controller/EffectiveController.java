@@ -1,6 +1,6 @@
 package com.wuan.weekly.controller;
 
-import com.wuan.weekly.entity.ShiXiaoXingEntity;
+import com.wuan.weekly.entity.EffectiveEntity;
 import com.wuan.weekly.entity.User;
 import com.wuan.weekly.mapper.WaGroupMapper;
 import com.wuan.weekly.service.IUserService;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Ericheel
- * 安卓特供(不懂别问,我也不懂
+ * 安卓所需的 保证数据时效性的接口
  * 2018-10-6 15:51:23
  */
 @RestController
-public class ShiXiaoXingController {
+public class EffectiveController {
 
     @Autowired
     private IUserService userService;
@@ -22,13 +22,13 @@ public class ShiXiaoXingController {
     private WaGroupMapper waGroupMapper;
 
     /**
-     * 获取一点东西
+     * 获取时效性数据
      *
      * @return
      */
     @RequestMapping("/getBlablablaByUserId")
     public @ResponseBody
-    ShiXiaoXingEntity getBlablablaByUserId(@RequestBody User auser) {
+    EffectiveEntity getBlablablaByUserId(@RequestBody User auser) {
         Integer userId = auser.getId();
         try {
             User user = userService.findUserByUserId(userId);
@@ -36,9 +36,9 @@ public class ShiXiaoXingController {
             Integer userGroupId = userService.findUserGroupByUserId(userId);
             String groupName = waGroupMapper.getGroupNameByGroupId(userGroupId);
 
-            return new ShiXiaoXingEntity(user, groupName, "200", "嘤"+userId+"~~~");
+            return new EffectiveEntity(user, groupName, "200", "嘤"+userId+"~~~");
         } catch (Exception e) {
-            return new ShiXiaoXingEntity(null, null, "500", "诗道:[情不知所起,一往情深,再而衰,三而竭,所以还是没有找到前端想要的信息.略略略" + userId + "~~~]" + "又有诗云:[" + e.getCause() + "---" + e.getMessage() + "]");
+            return new EffectiveEntity(null, null, "500", "错误!!请联系管理员");
         }
 
     }

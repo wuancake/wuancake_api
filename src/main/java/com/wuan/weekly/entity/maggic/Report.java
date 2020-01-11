@@ -96,7 +96,7 @@ public class Report implements Comparable<Report> {
 
 	@Override
 	public int compareTo(Report o) {
-		return o.weekNum > this.weekNum ? 1 : o.weekNum < this.weekNum ? -1 : 0;
+		return Integer.compare(o.weekNum, this.weekNum);
 	}
 	
 	@Override

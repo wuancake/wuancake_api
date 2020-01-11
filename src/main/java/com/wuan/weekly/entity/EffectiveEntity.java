@@ -3,9 +3,9 @@ package com.wuan.weekly.entity;
 
 /**
  * @author Ericheel
- * 安卓特供(不懂别问,我也不懂
+ * 安卓所需 保证时效性 Entity
  */
-public class ShiXiaoXingEntity {
+public class EffectiveEntity {
     private User user;  //用户信息表-密码除外
 
     private String groupName; //用户所在分组
@@ -46,9 +46,9 @@ public class ShiXiaoXingEntity {
         this.infoText = infoText;
     }
 
-    public ShiXiaoXingEntity(User user, String groupName, String infoCode, String infoText) {
+    public EffectiveEntity(User user, String groupName, String infoCode, String infoText) {
         if (user != null) {
-            user.setPassword("略略略(￣┰￣*)");
+            user.setPassword("");
         }
         this.user = user;
         this.groupName = groupName;

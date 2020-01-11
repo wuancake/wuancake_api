@@ -29,9 +29,9 @@ public class homePageService {
      * 向数据库提交请假周报
      */
     public void leaveWeekly(Leave[] leave) {
-        for (int i = 0; i < leave.length; i++) {
+        for (Leave value : leave) {
             //请假
-            mapper.leaveWeekly(leave[i], new Date());
+            mapper.leaveWeekly(value, new Date());
         }
     }
 

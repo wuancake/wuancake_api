@@ -24,7 +24,8 @@ public class MD5Utils {
      * 校验密码是否正确
      */
     public static boolean verify(String password, String md5) {
-        if (generate(password).equals(md5)) {
+        String pwd = generate(password);
+        if (pwd != null && pwd.equals(md5)) {
             return true;
         } else {
             return false;
