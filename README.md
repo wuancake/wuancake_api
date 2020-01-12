@@ -7,3 +7,14 @@
     spring.datasource.password=密码													   
     server.port=端口															  
     mybatis.configuration.map-underscore-to-camel-case=true
+    
+    
+##编译：
+
+修改项目pom.xml中这个地方,将项目打包为war或者jar
+
+` <packaging>war</packaging>`
+
+在项目根目录下使用maven命令,生成的target包下的xxx.war：
+
+`mvn clean package`
